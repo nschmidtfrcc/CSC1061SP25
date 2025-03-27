@@ -133,3 +133,14 @@ Ignore the entirety of Stash, it is not within the scope of this project.
 [Git Documentation](https://git-scm.com/doc) 
 
 [Git Cheatsheet](https://education.github.com/git-cheat-sheet-education.pdf)
+
+## Some useful custom commands 
+
+~~~
+git config --global alias.lg "log --all --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'"
+~~~
+**Usage:**
+View the last 10 commits
+~~~
+git lg -10 
+~~~
