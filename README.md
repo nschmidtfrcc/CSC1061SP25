@@ -157,6 +157,45 @@ Ignore the entirety of Stash, it is not within the scope of this project.
 
 [Git Cheatsheet](https://education.github.com/git-cheat-sheet-education.pdf)
 
+
+## Commands
+
+When you first come into class and you want to pull the latest files from the class main:
+
+~~~
+cd <to your project directory>
+git fetch
+git checkout main
+git pull
+git checkout <your branch name>
+git merge main
+~~~
+
+Saving your changes and pushing to your remote branch for submission, this is a two-step process:
+
+### Step One
+For a specific file
+~~~
+git add <filename>
+~~~
+For all updated files 
+~~~
+git add .
+~~~
+### Step Two
+~~~
+git commit -m "your message here"
+~~~
+Push to your remote server
+~~~
+git push 
+~~~
+Double check all looks good and inline:
+~~~
+git lg -10
+~~~
+
+
 ## Some useful custom commands 
 
 ~~~
