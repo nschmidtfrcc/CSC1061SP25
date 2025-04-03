@@ -1,9 +1,8 @@
 #include <iostream>
 #include <fstream>
+#include <string>
 #include "car.h"
 using namespace std;
-
-double sellCar(Car unsoldCars[], Car soldCars[], int& addIndex);
 
 /*     displayCarInfo           --Isaiah Fite--
 Parameters: The function expects a list of cars
@@ -15,7 +14,6 @@ Return: The function displays the information of each individual car in the list
 
 */
 void displayCarInfo(Car list[]) {
-
     int index;
     //int listSize = (sizeof(list)/sizeof(list[0])); Dynamic list sizing is not working for now
     for (index = 0; index < 10; ++index) {//Hardcoded listSize for now
@@ -38,15 +36,12 @@ void displayGrossSales(double totalSales) { // void function to display gross sa
     cout << " Total Gross Sales: " << totalSales << endl << endl;
 } //end void EP 
 
-
-
 /*
    searchInventory --Maria Lazarski--
    Parameters: The function expects an array of cars (either unsold or sold) and a search criterion (make, model, or year).
    Process: The function loops through the array of cars and compares the search criterion with the car's properties.
    Return: It prints the details of the cars that match the search criteria.
 */
-
 void searchInventory(Car list[]) {
     int searchChoice;
     string searchMake, searchModel, searchVin;
@@ -120,7 +115,6 @@ void searchInventory(Car list[]) {
     if (!found) {
         cout << "No cars found based on search" << endl;
     }//end if
-    cout << endl << endl; //Formatting
     //Function returns void 
     return;
 }// ends search function
@@ -155,8 +149,8 @@ int displayMenu() {
     }// end while IS
 
     return choice;
-}// end displayMenu
 
+}// end menuDisplay IS
 
 
 //PopulateInventory: Lexi Cocaign
@@ -230,7 +224,6 @@ int main(int argc, char* argv[]) {
     Car unsoldCars[10];
     int userChoice;
     double totalSales = 0.0;
-    int addIndex = 0;
 
     //Load in car inventory information
     PopulateInventory(unsoldCars);
@@ -251,9 +244,8 @@ int main(int argc, char* argv[]) {
         case 3:
             searchInventory(unsoldCars);
             break;
-         // Sell Car
-         case 4:
-            totalSales += sellCar(unsoldCars, soldCars, addIndex);
+            // Sell Car
+        case 4:
             break;
             // Display Gross Sales
         case 5:
@@ -267,33 +259,5 @@ int main(int argc, char* argv[]) {
     }//end while
 
     //export car inventory information
-}// end main IS
-  
-double sellCar(Car unsoldCars[], Car soldCars[], int& addIndex) {
-   int sellIndex = 0;
-   int size = 10;
-   bool found = false;
-   double price = 0;
-   Car emptyCar;
-   string vin = "";
-   cout << "Please enter the VIN of the car you wish to sell\n";
-   cin >> vin;
-   for (int i = 0; i < size; ++i) {
-      if (unsoldCars[i].getVin() == vin) {
-            sellIndex = i;
-            found = true;
-      }//end if statement. JK
-   }//end for statement. JK
-   if (! found) {
-      cout << "That car isn't available or was incorrectly entered!\n";
-   }//end if statement. JK
-   //call search inventory when it's finished. JK
-   if (addIndex <= 10) {
-      soldCars[addIndex] = unsoldCars[sellIndex];
-      price = unsoldCars[sellIndex].getPrice();
-      ++addIndex;
-   }//end if statement. JK
-   unsoldCars[sellIndex] = emptyCar;
-   return price;
-}//end sellCar(). JK
 
+}//end main
