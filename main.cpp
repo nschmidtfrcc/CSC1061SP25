@@ -1,8 +1,79 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include "Customer.h"
+#include <vector>
+#include <sstream>
 #include "car.h"
 using namespace std;
+
+// Function: loadUsersFromFile
+// Input: 
+//   - const string& filename: The name of the text file containing user data
+//   - vector<Customer>& customerList: A reference to a vector that will store loaded users
+//
+// Process: 
+//   - Opens the file for reading.
+//   - Reads each line, splits it into components (name, email, phone, isBuyer, VIN).
+//   - Converts the isBuyer string ("yes" or "no") into a boolean value.
+//   - Creates a Customer object using the extracted information.
+//   - Appends each User object into the provided customerList vector.
+//
+// Output: 
+//   - The userList vector is filled with User objects read from the file.
+
+void loadCustomersFromFile(const string& filename, vector<Customer>& customerList) {
+    ifstream inFS(filename);
+    if (!inFS.is_open()) {
+        cout << "Could not open file " << filename << endl;
+        return;
+    }
+
+    string line;
+    while (getline(inFS, line)) {
+        stringstream ss(line);
+        string name, email, phone;
+        string isBuyerStr;
+        string numVIN;
+        bool isBuyer = false;
+
+        getline(ss, name, ',');
+        getline(ss, email, ',');
+        getline(ss, phone, ',');
+        getline(ss, isBuyerStr, ',');
+        getline(ss, numVIN, ',');
+
+        if (isBuyerStr == "yes") {
+            isBuyer = true;
+        }
+
+        Customer customer(name, email, phone, isBuyer, numVIN);
+        customerList.push_back(customer);
+    }
+
+    inFS.close();
+}
+// Function: displayCustomerList
+// Input: 
+//   - None directly from the user
+//
+// Process: 
+//   - Calls loadUsersFromFile() to read user data from "UsersList.txt"
+//   - Iterates through the loaded users
+//   - Calls the displayInfo() method on each User to print their information
+//
+// Output: 
+//   - Prints the list of customers and potential buyers to the console
+
+void displayCustomerList() {
+    vector<Customer> customers;
+    loadCustomersFromFile("CustomersList.txt", customers);
+    cout << "\n--- Customer & Potential Buyer List ---\n";
+    for (const auto& customer : customers) {
+        customer.customerData();
+    }
+    cout << endl;
+}
 
 /*     displayCarInfo           --Isaiah Fite--
 Parameters: The function expects a list of cars
@@ -140,11 +211,12 @@ int displayMenu() {
     cout << "4. Sell Car" << endl;
     cout << "5. Display Gross Sales" << endl;
     cout << "6. Exit Program" << endl;
+    cout << "7. Display user list" << endl;
     cout << "Enter choice as integer: ";
     //get user input, then checks if it is valid IS
     cin >> choice;
-    while ((choice < 1) || (choice > 6)) {
-        cout << "Please enter an integer 1-6" << endl;
+    while ((choice < 1) || (choice > 7)) {
+        cout << "Please enter an integer 1-7" << endl;
         cin >> choice;
     }// end while IS
 
@@ -230,7 +302,7 @@ int main(int argc, char* argv[]) {
 
     //Display menu and functionality selection
     userChoice = displayMenu();
-    while ((userChoice > 0) && (userChoice < 6)) {
+    while ((userChoice > 0) && (userChoice <= 7)) {
         switch (userChoice) {
             // Display Available Car Information IS
         case 1:
@@ -251,6 +323,13 @@ int main(int argc, char* argv[]) {
         case 5:
             displayGrossSales(totalSales);
             break;
+            case 6:
+            cout <<" Exiting program......" << endl;
+            return 0;
+        case 7:
+        displayCustomerList();
+        break; 
+        // disPlay customer list
         default:
             cout << "This is an unacceptable selection." << endl;
             break;

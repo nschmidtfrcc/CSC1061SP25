@@ -9,16 +9,19 @@ class Customer {
    public:
    ///// CONSTRUCTORS /////
    Customer();
+   Customer(string nn, string ee, string pp, bool isBuyer, string vv);
    ///// SETTERS /////
    void setName(string nn);
    void setEmail(string ee);
    void setPhone(string pp);
    void purchase(string vv);
+   void setIsBuyer(bool isBuyer);
    ///// GETTERS /////
-   void customerData();
+   void customerData() const;
    string getName();
    string getEmail();
    string getPhone();
+   bool getIsBuyer();
    
    private:
    string name;
