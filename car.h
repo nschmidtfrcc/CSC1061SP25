@@ -30,6 +30,8 @@ class Car {
       string carModel;
       bool carSold;
       string carVin;
+      // string carColor;
+      
 };//end Car class. JK
 
 #endif

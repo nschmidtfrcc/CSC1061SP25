@@ -15,18 +15,20 @@ Car::Car() {
    carModel = "X";
    carSold = true;
    carVin = "X";
+   // carColor
 }//end default constructor. JK
 
 //Input: The car's price, year, make, model, whether it is sold or not, and its VIN.
 //Process: Set the private variables for price, year, make, model, sold, and VIN with its corresponding parameters.
 //Output: The private variables for price, year, make, model, sold, and VIN
-Car::Car(double price, int year, string make, string model,bool sold, string vin) {
+Car::Car(double price, int year, string make, string model,bool sold, string vin) { // color
    carPrice = price;
    carYear = year;
    carMake = make;
    carModel = model;
    carSold = sold;
    carVin = vin;
+   // carColor = color
 }//end parameterized constructor. JK
 
 //Input: The car's price
@@ -118,5 +120,5 @@ string Car::getVin() {
 //Process: Output the details of the car (year, make, model, etc) to the user
 //Output: The car's year, make, model, price, and VIN to the user.
 void Car::carDetails() {
-   cout << "Car Year: " << carYear << ". Car Make and Model: " << carMake << " " << carModel << ". Car Price: $" << carPrice << ". Car VIN: " << carVin;
+   cout << "Car Year: " << carYear << ". Car Make and Model: " << carMake << " " << carModel << ". Car Price: $" << carPrice << ". Car VIN: " << carVin; // Car Color: << color
 }//end carDetails(). JK
