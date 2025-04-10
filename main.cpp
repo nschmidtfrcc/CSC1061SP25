@@ -193,6 +193,32 @@ void PopulateInventory(Car unsoldCars[]) {
     return;
 }//end PopulateInventory
 
+// Kyle Kuchle
+void clearCar() {
+   unsoldCars[ii].setPrice(0);
+   unsoldCars[ii].setYear(0);
+   unsoldCars[ii].setMake(" ");
+   unsoldCars[ii].setModel(" ");
+   unsoldCars[ii].setSold(true);
+   unsoldCars[ii].setVin(" ");
+} // end clearCar()
+
+// Kyle Kuchle
+void markCarAsSold(Car unsoldCars[], Car soldCars[]) {  
+   int carSize = 10;
+   cout << "Please enter the vin number for the car you want to buy: " << endl;
+   cin >> carVin;
+    for (int ii = 0; ii < size; ++ii) {
+            if (unsoldCars[ii].getVin() == carVin) {
+                soldCars[ii] = unsoldCars[ii]; // update soldCars array
+                unsoldCars[ii].clearCar(); // calls clearCar function 
+                calculateTotalSales(Car soldCars[], carSize);
+            } else {
+            cout << "No car vin found. Please enter a new car vin: " << endl;
+            cin >> carVin;
+        } // end for KK
+} // end returnCarSold KK
+
 /*     CarDealershipMain
 Input: The program will expect numbers as input to traverse the menus and reach the desired function.
    Then the user will be prompted for specific input within each function. Input required in the search functionality
