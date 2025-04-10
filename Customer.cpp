@@ -37,3 +37,31 @@ string Customer::getName() { return name; }// end getName
 string Customer::getEmail() { return email; }// end getEmail
 
 string Customer::getPhone() { return phone; }// end getPhone
+
+// Input: None
+// Process: check if the customer is a buyer or prospect
+// Return: return true if the customer is a buyer, false if the customer is a prospect
+bool Customer::checkIfCustomerIsBuyer() {
+    if (isBuyer) {
+        return true;
+    } else {
+        return false;
+    }
+} //end checkIfCustomerIsBuyer()
+
+
+// Input: None
+// Process: get is buyer status
+// Return: return true if the customer is a buyer, false if the customer is a prospect
+bool Customer::getIsBuyer() {
+    return isBuyer;
+} //end getIsBuyer()
+
+
+// Input: Buyer status
+// Process: set is buyer status
+// Return: none
+void Customer::setIsBuyer(bool buyer) {
+    isBuyer = buyer;
+} //end setIsBuyer()
+//
