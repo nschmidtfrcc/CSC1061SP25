@@ -7,26 +7,28 @@ using namespace std;
 
 class Customer {
    public:
-   ///// CONSTRUCTORS /////
-   Customer();
-   ///// SETTERS /////
-   void setName(string nn);
-   void setEmail(string ee);
-   void setPhone(string pp);
-   void purchase(string vv);
-   ///// GETTERS /////
-   void customerData();
-   string getName();
-   string getEmail();
-   string getPhone();
+        ///// CONSTRUCTORS /////
+        Customer();
+        ///// SETTERS /////
+        void setName(string nn);
+        void setEmail(string ee);
+        void setPhone(string pp);
+        void purchase(string vv);
+        ///// GETTERS /////
+        void customerData();
+        string getName();
+        string getEmail();
+        string getPhone();
+        bool checkIfCustomerIsBuyer();
+        bool getIsBuyer();
+        void setIsBuyer(bool buyer);
    
    private:
-   string name;
-   string email;
-   string phone;
-   string VIN;
-   bool isBuyer;
-   
+        string name;
+        string email;
+        string phone;
+        string VIN;
+        bool isBuyer;
    
 };
 
