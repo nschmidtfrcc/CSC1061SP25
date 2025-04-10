@@ -1,9 +1,9 @@
 #include <iostream>
 #include <fstream>
+#include <string>
 #include "car.h"
 using namespace std;
-
-double sellCar(Car unsoldCars[], Car soldCars[], int& addIndex);
+void PopulateCustomers(Customer customers[]);
 
 /*     displayCarInfo           --Isaiah Fite--
 Parameters: The function expects a list of cars
@@ -15,7 +15,6 @@ Return: The function displays the information of each individual car in the list
 
 */
 void displayCarInfo(Car list[]) {
-
     int index;
     //int listSize = (sizeof(list)/sizeof(list[0])); Dynamic list sizing is not working for now
     for (index = 0; index < 10; ++index) {//Hardcoded listSize for now
@@ -38,15 +37,12 @@ void displayGrossSales(double totalSales) { // void function to display gross sa
     cout << " Total Gross Sales: " << totalSales << endl << endl;
 } //end void EP 
 
-
-
 /*
    searchInventory --Maria Lazarski--
    Parameters: The function expects an array of cars (either unsold or sold) and a search criterion (make, model, or year).
    Process: The function loops through the array of cars and compares the search criterion with the car's properties.
    Return: It prints the details of the cars that match the search criteria.
 */
-
 void searchInventory(Car list[]) {
     int searchChoice;
     string searchMake, searchModel, searchVin;
@@ -120,7 +116,6 @@ void searchInventory(Car list[]) {
     if (!found) {
         cout << "No cars found based on search" << endl;
     }//end if
-    cout << endl << endl; //Formatting
     //Function returns void 
     return;
 }// ends search function
@@ -155,9 +150,8 @@ int displayMenu() {
     }// end while IS
 
     return choice;
-}// end displayMenu
 
-
+}// end menuDisplay IS
 
 //PopulateInventory: Lexi Cocaign
 //Input:Gets array from main to put info into-LC
@@ -203,7 +197,7 @@ void PopulateInventory(Car unsoldCars[]) {
 Input: The program will expect numbers as input to traverse the menus and reach the desired function.
    Then the user will be prompted for specific input within each function. Input required in the search functionality
    is the make, model or year being searched for. Input required in the sell car functionality is the VIN number.
-   Input of a 6 is also required to exit the program
+   Input of a 6 is also required to exit the program.
 
 Process: This program will populate two arrays with the information of the unsold and sold cars from external files
    Then the program will expect numbers as input to traverse the menus and reach the desired function.
@@ -226,14 +220,15 @@ Output: Each time this program runs the menu is displayed and there is a possibl
 
 int main(int argc, char* argv[]) {
     //Declarations IF
-    Car soldCars[10];
-    Car unsoldCars[10];
+    Car soldCars[10], unsoldCars[10];
+    Customer customers[12];
     int userChoice;
     double totalSales = 0.0;
-    int addIndex = 0;
 
     //Load in car inventory information
     PopulateInventory(unsoldCars);
+    //Load in customer information
+    PopulateCustomers(customers);
 
     //Display menu and functionality selection
     userChoice = displayMenu();
@@ -251,9 +246,8 @@ int main(int argc, char* argv[]) {
         case 3:
             searchInventory(unsoldCars);
             break;
-         // Sell Car
-         case 4:
-            totalSales += sellCar(unsoldCars, soldCars, addIndex);
+            // Sell Car
+        case 4:
             break;
             // Display Gross Sales
         case 5:
@@ -267,33 +261,41 @@ int main(int argc, char* argv[]) {
     }//end while
 
     //export car inventory information
-}// end main IS
-  
-double sellCar(Car unsoldCars[], Car soldCars[], int& addIndex) {
-   int sellIndex = 0;
-   int size = 10;
-   bool found = false;
-   double price = 0;
-   Car emptyCar;
-   string vin = "";
-   cout << "Please enter the VIN of the car you wish to sell\n";
-   cin >> vin;
-   for (int i = 0; i < size; ++i) {
-      if (unsoldCars[i].getVin() == vin) {
-            sellIndex = i;
-            found = true;
-      }//end if statement. JK
-   }//end for statement. JK
-   if (! found) {
-      cout << "That car isn't available or was incorrectly entered!\n";
-   }//end if statement. JK
-   //call search inventory when it's finished. JK
-   if (addIndex <= 10) {
-      soldCars[addIndex] = unsoldCars[sellIndex];
-      price = unsoldCars[sellIndex].getPrice();
-      ++addIndex;
-   }//end if statement. JK
-   unsoldCars[sellIndex] = emptyCar;
-   return price;
-}//end sellCar(). JK
 
+}//end main
+
+/* INPUT PARM: Customer array.
+ * PROCESS: Populating the customers from the "Customers.txt" file.
+ * RETURN VALUE: None.
+ */
+void PopulateCustomers(Customer customers[]) {
+    ifstream FS;
+    int i = 0;
+    string name, email, phone, vin = "";
+    bool isBuyer;
+    
+    FS.open("Customers.txt"); // Note: Make sure name is right.
+    
+    if (!FS.is_open()) { // Check if file opened successfully
+        cout << "Could not open Customers.txt" << endl;
+    }//end if
+    
+    getline(FS, loopCount); // The number of customers to iterate through.
+    while (loopCount.size() > 0) {
+        // get info from file and convert strings into nums if needed
+        getline(FS, name);
+        getline(FS, email);
+        getline(FS, phone);
+        getline(FS, isBuyerStr);
+        isBuyer = isBuyerStr == "true";
+        //getline(FS, vin); // nobody has bought cars yet
+        
+        Customer currCustomer(name, email, phone, isBuyer, vin); // creates Customer object to store data in
+        customers[i] = currCustomer; // Customer gets put into the array at i
+        i++;
+        getline(FS, loopCount);
+    }//end while
+    
+    FS.close(); // close file when done
+    return;
+}//end PopulateCustomers
