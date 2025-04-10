@@ -119,18 +119,9 @@ string Car::getVin() {
    return carVin;
 }//end getVin(). JK
 
-<<<<<<< Updated upstream
 //Input: The carSold private variable
 //Process: Return the bool carSold to the user as a bool value.
 //Output: The carSold boolean.
 bool Car::getSold() {
    return carSold;
 }//end getSold(). JK
-=======
-//Input: The private variables for the car's year, make, model, price, and VIN.
-//Process: Output the details of the car (year, make, model, etc) to the user
-//Output: The car's year, make, model, price, and VIN to the user.
-void Car::carDetails() {
-   cout << "Car Year: " << carYear << ". Car Make and Model: " << carMake << " " << carModel << ". Car Price: $" << carPrice << ". Car VIN: " << carVin << endl;
-}//end carDetails(). JK
->>>>>>> Stashed changes
