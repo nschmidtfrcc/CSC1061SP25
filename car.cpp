@@ -81,7 +81,7 @@ void Car::setSold(bool sold) {
 //Process: Output the details of the car (year, make, model, etc) to the user
 //Output: The car's year, make, model, price, and VIN to the user.
 void Car::carDetails() {
-   cout << "Car Year: " << carYear << ". Car Make and Model: " << carMake << " " << carModel << ". Car Price: $" << carPrice << ". Car VIN: " << carVin;
+   cout << "Car Year: " << carYear << ". Car Make and Model: " << carMake << " " << carModel << ". Car Price: $" << carPrice << ". Car VIN: " << carVin << endl;
 }//end carDetails(). JK
 
 //Input: The private car's price variable.
