@@ -13,12 +13,14 @@ git config --global user.name "your group members names"
 ~~~
 ## Cloning The Repository
 
-Before we can do anything, we must clone a copy of the repository onto our machines. First, we can create a directory to clone the repo. Type the following into PowerShell or terminal:
+Before we can do anything, we must clone a copy of the repository onto our machines. First, we can create a directory to 
+clone the repo. Type the following into PowerShell or terminal:
 ~~~
 mkdir ClassProject 
 cd ClassProject 
 ~~~
-That created a new directory named ClassProject which you will work out of. We need to clone a copy of our Git repository to work directly with it. To do that, press the following code button on the front page of the repo:
+That created a new directory named ClassProject which you will work out of. We need to clone a copy of our Git repository 
+to work directly with it. To do that, press the following code button on the front page of the repo:
 ![Code Buttong](https://docs.github.com/assets/cb-13128/mw-1440/images/help/repository/code-button.webp)
 
 Ensure the HTTPS option is selected, then copy the link. The link should look something like this:
@@ -35,23 +37,34 @@ After cloning the repository we need to make a branch for us to work on. Run the
 cd <repository name> 
 git checkout -b <group-name> 
 ~~~
-This will make a new branch in the repository and move you to it. should be replaced with your group name with no whitespace (something like Tanner_Van-Es–Eli_Blume.)
+This will make a new branch in the repository and move you to it. should be replaced with your group name with no 
+whitespace (something like Tanner_Van-Es–Eli_Blume.)
 
-***Some IDEs will prompt you when they detect that you are in a Git repository, and if you allow the IDE, it will help abstract some of these command-line commands and run them for you through the graphical user interface. Depending on the IDE the rest of the readme might not be applicable***
+***Some IDEs will prompt you when they detect that you are in a Git repository, and if you allow the IDE, it will 
+help abstract some of these command-line commands and run them for you through the graphical user interface. 
+Depending on the IDE the rest of the readme might not be applicable***
 
 If you then type ls into PowerShell, you should see the name of the repository. Awesome!
 
-Now you have a local copy of the codebase on your machine, and it can be opened via your favorite IDE; navigate to the ClassProject directory like you would any directory and start the project. You can now begin freely working on your code.
+Now you have a local copy of the codebase on your machine, and it can be opened via your favorite IDE; navigate to 
+the ClassProject directory like you would any directory and start the project. You can now begin freely working on your code.
 
 ## Understanding and Working with Git
 
 The beauty of Git is its ability to share and help version our code.
 
-Three primary levels of Git are important to understand. The **local repository** (cloned repo to local machine with branch), the **staging area** (intermediate reviewing step before committing and pushing to your remote repository), and the **remote repository** (Main Repo).
+Three primary levels of Git are important to understand. The **local repository** (cloned repo to local machine with branch), 
+the **staging area** (intermediate reviewing step before committing and pushing to your remote repository), 
+and the **remote repository** (Main Repo).
 
-The **local repository** (local repo) is the copy of the repository on your machine (the repo we just cloned). The **staging area** is something we have yet to come across. After you have written some code, you can add the changes you have made to the staging area. The staging area allows the files you have changed to sit before you are ready to **commit** and **push** them into the remote repo, much like laying out the things you want to take on the bed before putting them in your suitcase.
+The **local repository** (local repo) is the copy of the repository on your machine (the repo we just cloned). 
+The **staging area** is something we have yet to come across. After you have written some code, you can add the 
+changes you have made to the staging area. The staging area allows the files you have changed to sit before 
+you are ready to **commit** and **push** them into the remote repo, much like laying out the things you want to 
+take on the bed before putting them in your suitcase.
 
-To add modified files into the staging area so they are ready for a commit, come back to your Terminal or PowerShell window and run:
+To add modified files into the staging area so they are ready for a commit, come back to your Terminal or PowerShell 
+window and run:
 ~~~
 git add <filenames> 
 ~~~
@@ -65,9 +78,11 @@ Next, type the following command in PowerShell:
 ~~~
 git commit -m "Your commit message here" 
 ~~~
-It is essential that your commit message is concise and clearly explains what you have modified or added so one of your peers/group members can see what you have done. Treat your commit messages as seriously as you would inline comments.
+It is essential that your commit message is concise and clearly explains what you have modified or added so one of your 
+peers/group members can see what you have done. Treat your commit messages as seriously as you would inline comments.
 
-**Committing should be done semi-frequently. If you have completed a section of code and successfully got it to compile and run, make a commit!!**
+**Committing should be done semi-frequently. If you have completed a section of code and successfully got it to compile 
+and run, make a commit!!**
 
 Finally, we can push our changes into the remote repository. To do so, run:
 ~~~
@@ -84,21 +99,29 @@ cd <repository name>
 git pull 
 ~~~
 
-You must run git pull in order to sync any changes made from the remote repository into your local repository. You also must be inside of the directory containing the forked repository in order for the Git command to work.
+You must run git pull in order to sync any changes made from the remote repository into your local repository. 
+You also must be inside of the directory containing the forked repository in order for the Git command to work.
 
 **If you are using an IDE, there should be an option to run git pull**
 
 ## Submitting Your Code
 
-If your group feels good about the code you have written and want to “submit” it, create a pull request. In order to do that first navigate to repo look for the Branch button in the top left and navigate to your branch. Next find the contribute button (as seen above). This will open a new screen:
+If your group feels good about the code you have written and want to “submit” it, create a pull request. In order to 
+do that first navigate to repo look for the Branch button in the top left and navigate to your branch. Next find the 
+contribute button (as seen above). This will open a new screen:
 
-A pull request is a way for you to request that your code be pulled into the main repository. As you can see, there is space for you to add a title and a description. Also note that at the bottom of the screen it shows all the commits and files changed that are apart of this pull request.
+A pull request is a way for you to request that your code be pulled into the main repository. As you can see, there is 
+space for you to add a title and a description. Also note that at the bottom of the screen it shows all the commits and 
+files changed that are apart of this pull request.
 
-Once you write a sufficient title and add a description explaining your code press the **Create pull request** button. You have successfully created a pull request thread, in which the pull request lives. From this point your code will be reviewed and any discussion, changes, or announcements regarding that pull request will happen within the thread.
+Once you write a sufficient title and add a description explaining your code press the **Create pull request** button. 
+You have successfully created a pull request thread, in which the pull request lives. From this point your code will be 
+reviewed and any discussion, changes, or announcements regarding that pull request will happen within the thread.
 
 ## Using Personal Device
 
-**If you are using your personal device you will need to install Git onto your computer. The following instructions go though those steps.** 
+**If you are using your personal device you will need to install Git onto your computer. The following instructions go 
+though those steps.** 
 
 **Windows**
 On Windows, first install Git. Then open up the program Windows PowerShell.
@@ -133,6 +156,45 @@ Ignore the entirety of Stash, it is not within the scope of this project.
 [Git Documentation](https://git-scm.com/doc) 
 
 [Git Cheatsheet](https://education.github.com/git-cheat-sheet-education.pdf)
+
+
+## Commands
+
+When you first come into class and you want to pull the latest files from the class main:
+
+~~~
+cd <to your project directory>
+git fetch
+git checkout main
+git pull
+git checkout <your branch name>
+git merge main
+~~~
+
+Saving your changes and pushing to your remote branch for submission, this is a two-step process:
+
+### Step One
+For a specific file
+~~~
+git add <filename>
+~~~
+For all updated files 
+~~~
+git add .
+~~~
+### Step Two
+~~~
+git commit -m "your message here"
+~~~
+Push to your remote server
+~~~
+git push 
+~~~
+Double check all looks good and inline:
+~~~
+git lg -10
+~~~
+
 
 ## Some useful custom commands 
 

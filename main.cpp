@@ -3,6 +3,7 @@
 #include <string>
 #include "car.h"
 using namespace std;
+
 void PopulateCustomers(Customer customers[]);
 
 /*     displayCarInfo           --Isaiah Fite--
@@ -25,7 +26,23 @@ void displayCarInfo(Car list[]) {
     }//end for
     return;
 }//end displayCarInfo
+/* calculateTotalSales    --Calvin Deming--
+Parameters:Takes in the soldCars[] array and the array's size
 
+Process:If car is "sold" add the sold car's price to total sales
+
+Output:Return totalSales back to main so it can be called upon by 
+       the display gross sales function
+*/
+double calculateTotalSales(Car soldCars[], int size){
+   double totalSales = 0.0;
+   for(int ii = 0; ii < size; ii++){
+      if(soldCars[ii].getSold()){
+         totalSales += soldCars[ii].getPrice();
+      }
+   }
+   return totalSales;
+}
 
 /*
 displayGrossSales --Emilio Pinales--
@@ -150,7 +167,6 @@ int displayMenu() {
     }// end while IS
 
     return choice;
-
 }// end menuDisplay IS
 
 //PopulateInventory: Lexi Cocaign
@@ -238,19 +254,20 @@ int main(int argc, char* argv[]) {
         case 1:
             displayCarInfo(unsoldCars);
             break;
-            // Display Sold Car Information IS
+        // Display Sold Car Information IS
         case 2:
             displayCarInfo(soldCars);
             break;
-            // Search Available Inventory IS
+        // Search Available Inventory IS
         case 3:
             searchInventory(unsoldCars);
             break;
-            // Sell Car
+        // Sell Car
         case 4:
             break;
-            // Display Gross Sales
+        // Display Gross Sales
         case 5:
+            totalSales = calculateTotalSales(soldCars, 10);
             displayGrossSales(totalSales);
             break;
         default:
@@ -299,3 +316,4 @@ void PopulateCustomers(Customer customers[]) {
     FS.close(); // close file when done
     return;
 }//end PopulateCustomers
+

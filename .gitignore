@@ -1,0 +1,8 @@
+.DS_Store
+main
+*.workspace
+*.jgrasp
+makefile
+*.exe
+*.gpj
+do_not_sync/
