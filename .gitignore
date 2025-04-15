@@ -5,3 +5,4 @@ main
 makefile
 *.exe
 *.gpj
+do_not_sync/
