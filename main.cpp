@@ -4,6 +4,8 @@
 #include "car.h"
 using namespace std;
 
+void PopulateCustomers(Customer customers[]);
+
 /*     displayCarInfo           --Isaiah Fite--
 Parameters: The function expects a list of cars
 
@@ -165,9 +167,7 @@ int displayMenu() {
     }// end while IS
 
     return choice;
-
 }// end menuDisplay IS
-
 
 //PopulateInventory: Lexi Cocaign
 //Input:Gets array from main to put info into-LC
@@ -213,7 +213,7 @@ void PopulateInventory(Car unsoldCars[]) {
 Input: The program will expect numbers as input to traverse the menus and reach the desired function.
    Then the user will be prompted for specific input within each function. Input required in the search functionality
    is the make, model or year being searched for. Input required in the sell car functionality is the VIN number.
-   Input of a 6 is also required to exit the program
+   Input of a 6 is also required to exit the program.
 
 Process: This program will populate two arrays with the information of the unsold and sold cars from external files
    Then the program will expect numbers as input to traverse the menus and reach the desired function.
@@ -236,13 +236,15 @@ Output: Each time this program runs the menu is displayed and there is a possibl
 
 int main(int argc, char* argv[]) {
     //Declarations IF
-    Car soldCars[10];
-    Car unsoldCars[10];
+    Car soldCars[10], unsoldCars[10];
+    Customer customers[12];
     int userChoice;
     double totalSales = 0.0;
 
     //Load in car inventory information
     PopulateInventory(unsoldCars);
+    //Load in customer information
+    PopulateCustomers(customers);
 
     //Display menu and functionality selection
     userChoice = displayMenu();
@@ -278,3 +280,40 @@ int main(int argc, char* argv[]) {
     //export car inventory information
 
 }//end main
+
+/* INPUT PARM: Customer array.
+ * PROCESS: Populating the customers from the "Customers.txt" file.
+ * RETURN VALUE: None.
+ */
+void PopulateCustomers(Customer customers[]) {
+    ifstream FS;
+    int i = 0;
+    string name, email, phone, vin = "";
+    bool isBuyer;
+    
+    FS.open("Customers.txt"); // Note: Make sure name is right.
+    
+    if (!FS.is_open()) { // Check if file opened successfully
+        cout << "Could not open Customers.txt" << endl;
+    }//end if
+    
+    getline(FS, loopCount); // The number of customers to iterate through.
+    while (loopCount.size() > 0) {
+        // get info from file and convert strings into nums if needed
+        getline(FS, name);
+        getline(FS, email);
+        getline(FS, phone);
+        getline(FS, isBuyerStr);
+        isBuyer = isBuyerStr == "true";
+        //getline(FS, vin); // nobody has bought cars yet
+        
+        Customer currCustomer(name, email, phone, isBuyer, vin); // creates Customer object to store data in
+        customers[i] = currCustomer; // Customer gets put into the array at i
+        i++;
+        getline(FS, loopCount);
+    }//end while
+    
+    FS.close(); // close file when done
+    return;
+}//end PopulateCustomers
+
