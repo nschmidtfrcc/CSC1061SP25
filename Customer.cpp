@@ -38,6 +38,7 @@ string Customer::getEmail() { return email; }// end getEmail
 
 string Customer::getPhone() { return phone; }// end getPhone
 
+// Author:  Steven Albarracin
 // Input: None
 // Process: check if the customer is a buyer or prospect
 // Return: return true if the customer is a buyer, false if the customer is a prospect
@@ -49,7 +50,7 @@ bool Customer::checkIfCustomerIsBuyer() {
     }
 } //end checkIfCustomerIsBuyer()
 
-
+// Author: Steven Albarracin
 // Input: None
 // Process: get is buyer status
 // Return: return true if the customer is a buyer, false if the customer is a prospect
@@ -57,7 +58,7 @@ bool Customer::getIsBuyer() {
     return isBuyer;
 } //end getIsBuyer()
 
-
+// Author: Steven Albarracin
 // Input: Buyer status
 // Process: set is buyer status
 // Return: none
