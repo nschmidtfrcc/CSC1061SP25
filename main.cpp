@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include "car.h"
+#include "Car.h"
 using namespace std;
 
 void PopulateCustomers(Customer customers[]);
