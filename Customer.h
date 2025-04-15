@@ -14,11 +14,14 @@ class Customer {
    void setEmail(string ee);
    void setPhone(string pp);
    void purchase(string vv);
-   ///// GETTERS /////
+   void setIsBuyer(bool bb);
+   bool checkIfCustomerIsBuyer();
+   ///// GETTERS /////  
    void customerData();
    string getName();
    string getEmail();
    string getPhone();
+   bool getIsBuyer();
    
    private:
    string name;
