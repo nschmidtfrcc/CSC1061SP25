@@ -17,7 +17,7 @@ class Car {
       void setModel(string model);
       void setVin(string vin);
       void setSold(bool sold);
-		void setColor(string color);
+      void setColor(string color);
 
       ///// GETTERS /////
       void carDetails();
@@ -27,7 +27,7 @@ class Car {
       string getModel();
       string getVin();
       bool getSold();
-		string getColor();
+      string getColor();
    private:
       double carPrice;
       int carYear;
