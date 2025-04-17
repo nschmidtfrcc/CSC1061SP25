@@ -9,7 +9,7 @@ class Car {
    public:
       ///// CONSTRUCTOR /////
       Car();
-      Car(double price, int year, string make, string model, bool sold, string vin);
+      Car(double price, int year, string make, string model, bool sold, string vin, string color);
       ///// SETTERS /////
       void setPrice(double price);
       void setYear(int year);
