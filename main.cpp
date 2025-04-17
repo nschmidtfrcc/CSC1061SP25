@@ -1,58 +1,13 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include "Car.h"
 #include "Customer.h"
-#include <vector>
-#include <sstream>
-#include "car.h"
+
 using namespace std;
 
-// Function: loadUsersFromFile
-// Input: 
-//   - const string& filename: The name of the text file containing user data
-//   - vector<Customer>& customerList: A reference to a vector that will store loaded users
-//
-// Process: 
-//   - Opens the file for reading.
-//   - Reads each line, splits it into components (name, email, phone, isBuyer, VIN).
-//   - Converts the isBuyer string ("yes" or "no") into a boolean value.
-//   - Creates a Customer object using the extracted information.
-//   - Appends each User object into the provided customerList vector.
-//
-// Output: 
-//   - The userList vector is filled with User objects read from the file.
+void PopulateCustomers(Customer customers[]);
 
-void loadCustomersFromFile(const string& filename, vector<Customer>& customerList) {
-    ifstream inFS(filename);
-    if (!inFS.is_open()) {
-        cout << "Could not open file " << filename << endl;
-        return;
-    }
-
-    string line;
-    while (getline(inFS, line)) {
-        stringstream ss(line);
-        string name, email, phone;
-        string isBuyerStr;
-        string numVIN;
-        bool isBuyer = false;
-
-        getline(ss, name, ',');
-        getline(ss, email, ',');
-        getline(ss, phone, ',');
-        getline(ss, isBuyerStr, ',');
-        getline(ss, numVIN, ',');
-
-        if (isBuyerStr == "yes") {
-            isBuyer = true;
-        }
-
-        Customer customer(name, email, phone, isBuyer, numVIN);
-        customerList.push_back(customer);
-    }
-
-    inFS.close();
-}
 // Function: displayCustomerList
 // Input: 
 //   - None directly from the user
@@ -75,6 +30,7 @@ void displayCustomerList() {
     cout << endl;
 }
 
+
 /*     displayCarInfo           --Isaiah Fite--
 Parameters: The function expects a list of cars
 
@@ -95,7 +51,23 @@ void displayCarInfo(Car list[]) {
     }//end for
     return;
 }//end displayCarInfo
+/* calculateTotalSales    --Calvin Deming--
+Parameters:Takes in the soldCars[] array and the array's size
 
+Process:If car is "sold" add the sold car's price to total sales
+
+Output:Return totalSales back to main so it can be called upon by 
+       the display gross sales function
+*/
+double calculateTotalSales(Car soldCars[], int size){
+   double totalSales = 0.0;
+   for(int ii = 0; ii < size; ii++){
+      if(soldCars[ii].getSold()){
+         totalSales += soldCars[ii].getPrice();
+      }
+   }
+   return totalSales;
+}
 
 /*
 displayGrossSales --Emilio Pinales--
@@ -114,7 +86,7 @@ void displayGrossSales(double totalSales) { // void function to display gross sa
    Return: It prints the details of the cars that match the search criteria.
 */
 void searchInventory(Car list[]) {
-    int searchChoice;
+    string searchChoice = "0";
     string searchMake, searchModel, searchVin;
     int searchYear;
     int size = 10;
@@ -126,9 +98,18 @@ void searchInventory(Car list[]) {
     cout << "3. Year" << endl;
     cout << "4. VIN" << endl;
     cout << "Enter choice (1-4): ";
-    cin >> searchChoice;
-
-    if (searchChoice == 1) {
+    //get user input and get the size of variable. VI
+    getline(cin, searchChoice);
+    int searchChoiceLength = searchChoice.length();
+    // While loop executes until choice is a single digit within range of menu choices. VI
+    while ((searchChoiceLength < 1) || (searchChoiceLength > 1) || (!isdigit(searchChoice.at(0))) || (stoi(searchChoice) > 4) || (stoi(searchChoice) < 1)) {
+        cout << "Please enter an integer 1-4:";
+        getline(cin, searchChoice);
+        searchChoiceLength = searchChoice.length();
+    }// end while VI
+    // Now that input has been validated as a menu choice, convert to int. VI
+    int validSearchChoice = stoi(searchChoice);
+    if (validSearchChoice == 1) {
         // Search by make
         cout << "Enter car make: ";
         cin.ignore();  // To ignore any leftover newline character
@@ -142,7 +123,7 @@ void searchInventory(Car list[]) {
         }//end for
 
     }
-    else if (searchChoice == 2) {
+    else if (validSearchChoice == 2) {
         // Search by model
         cout << "Enter car model: ";
         cin.ignore();  // To ignore any leftover newline character
@@ -155,7 +136,7 @@ void searchInventory(Car list[]) {
             }//end if
         }//end for
     }//end else if
-    else if (searchChoice == 3) {
+    else if (validSearchChoice == 3) {
         // Search by year
         cout << "Enter car year: ";
         cin >> searchYear;
@@ -167,7 +148,7 @@ void searchInventory(Car list[]) {
             }//end if
         }//end for
     }//end else if
-    else if (searchChoice == 4) {
+    else if (validSearchChoice == 4) {
         // Search by VIN
         cout << "Enter car VIN: ";
         cin >> searchVin;
@@ -192,7 +173,7 @@ void searchInventory(Car list[]) {
 
 /* displayMenu
 Name: Isaac Seyer
-
+Name: Victor Ibarra
 Input: The user will input an integer between 1 and 6 (inclusive) to choose an option
 
 Process: The function first initializes the variable to store the user's choice, then displays the menu. The function then asks for
@@ -203,7 +184,7 @@ Output: an integer ranging from 1-6 (inclusive)
 */
 int displayMenu() {
     // variable for user input IS
-    int choice = 0;
+    string choice = "0";
     // following six lines display menu IS
     cout << "1. Display Available Car Information" << endl;
     cout << "2. Display Sold Car Information" << endl;
@@ -213,17 +194,21 @@ int displayMenu() {
     cout << "6. Exit Program" << endl;
     cout << "7. Display user list" << endl;
     cout << "Enter choice as integer: ";
-    //get user input, then checks if it is valid IS
-    cin >> choice;
-    while ((choice < 1) || (choice > 7)) {
-        cout << "Please enter an integer 1-7" << endl;
-        cin >> choice;
+    //get user input and get the size of variable. VI
+    getline(cin, choice);
+    int choiceLength = choice.length();
+    // While loop executes until choice is a single digit within range of menu choices. VI
+    while ((choiceLength < 1) || (choiceLength > 1) || (!isdigit(choice.at(0))) || (stoi(choice) > 7) || (stoi(choice) < 1)) {
+        cout << "Please enter an integer 1-7:";
+        getline(cin, choice);
+        choiceLength = choice.length();
     }// end while IS
-
-    return choice;
-
+  
+    // Now that input has been validated as a menu choice, convert to int. VI
+    int validatedChoice = stoi(choice);
+    return validatedChoice;
+  
 }// end menuDisplay IS
-
 
 //PopulateInventory: Lexi Cocaign
 //Input:Gets array from main to put info into-LC
@@ -269,7 +254,7 @@ void PopulateInventory(Car unsoldCars[]) {
 Input: The program will expect numbers as input to traverse the menus and reach the desired function.
    Then the user will be prompted for specific input within each function. Input required in the search functionality
    is the make, model or year being searched for. Input required in the sell car functionality is the VIN number.
-   Input of a 6 is also required to exit the program
+   Input of a 6 is also required to exit the program.
 
 Process: This program will populate two arrays with the information of the unsold and sold cars from external files
    Then the program will expect numbers as input to traverse the menus and reach the desired function.
@@ -292,13 +277,15 @@ Output: Each time this program runs the menu is displayed and there is a possibl
 
 int main(int argc, char* argv[]) {
     //Declarations IF
-    Car soldCars[10];
-    Car unsoldCars[10];
+    Car soldCars[10], unsoldCars[10];
+    Customer customers[12];
     int userChoice;
     double totalSales = 0.0;
 
     //Load in car inventory information
     PopulateInventory(unsoldCars);
+    //Load in customer information
+    PopulateCustomers(customers);
 
     //Display menu and functionality selection
     userChoice = displayMenu();
@@ -308,19 +295,20 @@ int main(int argc, char* argv[]) {
         case 1:
             displayCarInfo(unsoldCars);
             break;
-            // Display Sold Car Information IS
+        // Display Sold Car Information IS
         case 2:
             displayCarInfo(soldCars);
             break;
-            // Search Available Inventory IS
+        // Search Available Inventory IS
         case 3:
             searchInventory(unsoldCars);
             break;
-            // Sell Car
+        // Sell Car
         case 4:
             break;
-            // Display Gross Sales
+        // Display Gross Sales
         case 5:
+            totalSales = calculateTotalSales(soldCars, 10);
             displayGrossSales(totalSales);
             break;
             case 6:
@@ -340,3 +328,40 @@ int main(int argc, char* argv[]) {
     //export car inventory information
 
 }//end main
+
+/* INPUT PARM: Customer array.
+ * PROCESS: Populating the customers from the "Customers.txt" file.
+ * RETURN VALUE: None.
+ */
+void PopulateCustomers(Customer customers[]) {
+    ifstream FS;
+    int i = 0;
+    string name, email, phone, vin = "";
+    bool isBuyer;
+    
+    FS.open("Customers.txt"); // Note: Make sure name is right.
+    
+    if (!FS.is_open()) { // Check if file opened successfully
+        cout << "Could not open Customers.txt" << endl;
+    }//end if
+    
+    getline(FS, loopCount); // The number of customers to iterate through.
+    while (loopCount.size() > 0) {
+        // get info from file and convert strings into nums if needed
+        getline(FS, name);
+        getline(FS, email);
+        getline(FS, phone);
+        getline(FS, isBuyerStr);
+        isBuyer = isBuyerStr == "true";
+        //getline(FS, vin); // nobody has bought cars yet
+        
+        Customer currCustomer(name, email, phone, vin, isBuyer); // creates Customer object to store data in
+        customers[i] = currCustomer; // Customer gets put into the array at i
+        i++;
+        getline(FS, loopCount);
+    }//end while
+    
+    FS.close(); // close file when done
+    return;
+}//end PopulateCustomers
+
