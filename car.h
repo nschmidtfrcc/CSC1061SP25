@@ -1,5 +1,5 @@
-#ifndef car_h
-#define car_h
+#ifndef Car_h
+#define Car_h
 
 #include <string>
 
@@ -7,31 +7,35 @@ using namespace std;
 
 class Car {
    public:
-
+      ///// CONSTRUCTOR /////
       Car();
-      Car(double price, int year, string make, string model, bool sold, string vin);
-      void carDetails();
+      Car(double price, int year, string make, string model, bool sold, string vin, string color);
+      ///// SETTERS /////
       void setPrice(double price);
-      double getPrice();
       void setYear(int year);
-      int getYear();
       void setMake(string make);
-      string getMake();
       void setModel(string model);
-      string getModel();
-      void setSold(bool sold);
-      bool getSold();
       void setVin(string vin);
+      void setSold(bool sold);
+      void setColor(string color);
+
+      ///// GETTERS /////
+      void carDetails();
+      double getPrice();
+      int getYear();
+      string getMake();
+      string getModel();
       string getVin();
+      bool getSold();
+      string getColor();
    private:
       double carPrice;
       int carYear;
       string carMake;
       string carModel;
-      bool carSold;
       string carVin;
-      // string carColor;
-      
+      bool carSold;
+      string carColor;
 };//end Car class. JK
 
 #endif
