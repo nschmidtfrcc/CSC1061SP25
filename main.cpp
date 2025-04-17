@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 #include "Car.h"
+#include "Customer.h"
 using namespace std;
 
 void PopulateCustomers(Customer customers[]);
@@ -322,7 +323,7 @@ void PopulateCustomers(Customer customers[]) {
         isBuyer = isBuyerStr == "true";
         //getline(FS, vin); // nobody has bought cars yet
         
-        Customer currCustomer(name, email, phone, vin isBuyer); // creates Customer object to store data in
+        Customer currCustomer(name, email, phone, vin, isBuyer); // creates Customer object to store data in
         customers[i] = currCustomer; // Customer gets put into the array at i
         i++;
         getline(FS, loopCount);
