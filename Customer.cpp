@@ -17,6 +17,7 @@ Customer::Customer() {
    cout << "WARNING: Customer Data is Null" << endl;
 }//end Customer default constructor
 
+
 //Author: Sawyer Anderson
 //Input: Takes inputs for name, email, phone number, vin, and if customer is a buyer
 //Process: Assigns customer values to the given inputs
@@ -71,6 +72,12 @@ void Customer::customerData() {
    cout << "Name: " << name << endl;
    cout << "Email: " << email << endl;
    cout << "Phone Number: " << phone << endl;
+if(isBuyer==true){
+        cout << ", he is buyer" << endl;
+} else { cout << ", he is not buyer"<<endl;
+}// end if-else
+cout <<"VIN number: " << VIN << endl;
+
 // not finished, need bought car data, etc.
 }// end customerData
 
