@@ -3,9 +3,33 @@
 #include <string>
 #include "Car.h"
 #include "Customer.h"
+
 using namespace std;
 
 void PopulateCustomers(Customer customers[]);
+
+// Function: displayCustomerList
+// Input: 
+//   - None directly from the user
+//
+// Process: 
+//   - Calls loadUsersFromFile() to read user data from "UsersList.txt"
+//   - Iterates through the loaded users
+//   - Calls the displayInfo() method on each User to print their information
+//
+// Output: 
+//   - Prints the list of customers and potential buyers to the console
+
+void displayCustomerList() {
+    vector<Customer> customers;
+    loadCustomersFromFile("CustomersList.txt", customers);
+    cout << "\n--- Customer & Potential Buyer List ---\n";
+    for (const auto& customer : customers) {
+        customer.customerData();
+    }
+    cout << endl;
+}
+
 
 /*     displayCarInfo           --Isaiah Fite--
 Parameters: The function expects a list of cars
@@ -168,13 +192,14 @@ int displayMenu() {
     cout << "4. Sell Car" << endl;
     cout << "5. Display Gross Sales" << endl;
     cout << "6. Exit Program" << endl;
+    cout << "7. Display user list" << endl;
     cout << "Enter choice as integer: ";
     //get user input and get the size of variable. VI
     getline(cin, choice);
     int choiceLength = choice.length();
     // While loop executes until choice is a single digit within range of menu choices. VI
-    while ((choiceLength < 1) || (choiceLength > 1) || (!isdigit(choice.at(0))) || (stoi(choice) > 6) || (stoi(choice) < 1)) {
-        cout << "Please enter an integer 1-6:";
+    while ((choiceLength < 1) || (choiceLength > 1) || (!isdigit(choice.at(0))) || (stoi(choice) > 7) || (stoi(choice) < 1)) {
+        cout << "Please enter an integer 1-7:";
         getline(cin, choice);
         choiceLength = choice.length();
     }// end while IS
@@ -264,7 +289,7 @@ int main(int argc, char* argv[]) {
 
     //Display menu and functionality selection
     userChoice = displayMenu();
-    while ((userChoice > 0) && (userChoice < 6)) {
+    while ((userChoice > 0) && (userChoice <= 7)) {
         switch (userChoice) {
             // Display Available Car Information IS
         case 1:
@@ -286,6 +311,13 @@ int main(int argc, char* argv[]) {
             totalSales = calculateTotalSales(soldCars, 10);
             displayGrossSales(totalSales);
             break;
+            case 6:
+            cout <<" Exiting program......" << endl;
+            return 0;
+        case 7:
+        displayCustomerList();
+        break; 
+        // disPlay customer list
         default:
             cout << "This is an unacceptable selection." << endl;
             break;
@@ -323,7 +355,7 @@ void PopulateCustomers(Customer customers[]) {
         isBuyer = isBuyerStr == "true";
         //getline(FS, vin); // nobody has bought cars yet
         
-        Customer currCustomer(name, email, phone, isBuyer, vin); // creates Customer object to store data in
+        Customer currCustomer(name, email, phone, vin, isBuyer); // creates Customer object to store data in
         customers[i] = currCustomer; // Customer gets put into the array at i
         i++;
         getline(FS, loopCount);
