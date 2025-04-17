@@ -38,6 +38,8 @@ string Customer::getEmail() { return email; }// end getEmail
 
 string Customer::getPhone() { return phone; }// end getPhone
 
+string Customer::getCar() {return VIN; } // end getCar
+
 // Author:  Steven Albarracin
 // Input: None
 // Process: check if the customer is a buyer or prospect
@@ -66,3 +68,4 @@ void Customer::setIsBuyer(bool buyer) {
     isBuyer = buyer;
 } //end setIsBuyer()
 //
+
