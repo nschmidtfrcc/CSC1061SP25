@@ -33,6 +33,19 @@ Car::Car(double price, int year, string make, string model, bool sold, string vi
    carColor = color;
 }//end parameterized constructor. JK
 
+// Input: an existing car. VI
+// Process: create a new car based on the old car. VI
+// Output: the new car. VI
+Car::Car(Car& soldCar){
+   this->carPrice = soldCar.carPrice;
+   this->carYear = soldCar.carYear;
+   this->carMake = soldCar.carMake;
+   this->carModel = soldCar.carModel;
+   this->carVin = soldCar.carVin;
+   this->carSold = soldCar.carSold;
+   this->carColor = soldCar.carColor;
+} // end copy constuctor. VI
+
 ///// SETTERS /////
 
 //Input: The car's price
