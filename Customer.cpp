@@ -99,6 +99,8 @@ string Customer::getEmail() { return email; }// end getEmail
 //Output: Returns phone
 string Customer::getPhone() { return phone; }// end getPhone
 
+string Customer::getCar() {return VIN; } // end getCar
+
 // Author: Steven Albarracin
 // Input: None
 // Process: get is buyer status
@@ -117,4 +119,3 @@ bool Customer::checkIfBuyer() {
     }
 } //end checkIfBuyer()
 
-//

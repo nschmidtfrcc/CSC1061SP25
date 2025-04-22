@@ -146,5 +146,5 @@ bool Car::getSold() {
 }//end getSold(). JK
 
 string Car::getColor() {
-	return color;
+	return carColor;
 }
