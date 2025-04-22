@@ -10,6 +10,7 @@ class Car {
       ///// CONSTRUCTOR /////
       Car();
       Car(double price, int year, string make, string model, bool sold, string vin, string color);
+      Car(Car& soldCar);
       ///// SETTERS /////
       void setPrice(double price);
       void setYear(int year);
