@@ -17,19 +17,34 @@ Car::Car() {
    carModel = "X";
    carSold = true;
    carVin = "X";
+   carColor = "X";
 }//end default constructor. JK
 
 //Input: The car's price, year, make, model, whether it is sold or not, and its VIN.
 //Process: Set the private variables for price, year, make, model, sold, and VIN with its corresponding parameters.
 //Output: The private variables for price, year, make, model, sold, and VIN
-Car::Car(double price, int year, string make, string model,bool sold, string vin) {
+Car::Car(double price, int year, string make, string model, bool sold, string vin, string color) {
    carPrice = price;
    carYear = year;
    carMake = make;
    carModel = model;
    carSold = sold;
    carVin = vin;
+   carColor = color;
 }//end parameterized constructor. JK
+
+// Input: an existing car. VI
+// Process: create a new car based on the old car. VI
+// Output: the new car. VI
+Car::Car(Car& soldCar){
+   this->carPrice = soldCar.carPrice;
+   this->carYear = soldCar.carYear;
+   this->carMake = soldCar.carMake;
+   this->carModel = soldCar.carModel;
+   this->carVin = soldCar.carVin;
+   this->carSold = soldCar.carSold;
+   this->carColor = soldCar.carColor;
+} // end copy constuctor. VI
 
 ///// SETTERS /////
 
@@ -74,6 +89,10 @@ void Car::setVin(string vin) {
 void Car::setSold(bool sold) {
    carSold = sold;
 }//end setSold(). JK
+
+void Car::setColor(string color) {
+	carColor = color;
+}
 
 ///// GETTERS /////
 
@@ -125,3 +144,7 @@ string Car::getVin() {
 bool Car::getSold() {
    return carSold;
 }//end getSold(). JK
+
+string Car::getColor() {
+	return color;
+}

@@ -9,7 +9,8 @@ class Car {
    public:
       ///// CONSTRUCTOR /////
       Car();
-      Car(double price, int year, string make, string model, bool sold, string vin);
+      Car(double price, int year, string make, string model, bool sold, string vin, string color);
+      Car(Car& soldCar);
       ///// SETTERS /////
       void setPrice(double price);
       void setYear(int year);
@@ -17,6 +18,8 @@ class Car {
       void setModel(string model);
       void setVin(string vin);
       void setSold(bool sold);
+      void setColor(string color);
+
       ///// GETTERS /////
       void carDetails();
       double getPrice();
@@ -25,6 +28,7 @@ class Car {
       string getModel();
       string getVin();
       bool getSold();
+      string getColor();
    private:
       double carPrice;
       int carYear;
@@ -32,6 +36,7 @@ class Car {
       string carModel;
       string carVin;
       bool carSold;
+      string carColor;
 };//end Car class. JK
 
 #endif
