@@ -694,7 +694,8 @@ int main(int argc, char* argv[]) {
  */
 void PopulateCustomers(Customer customers[]) {
     ifstream FS;
-    int i = 0;
+    string isBuyerStr;
+    int loopCount = 10; // The number of customers to iterate through. // Temp.
     string name, email, phone, vin = "";
     bool isBuyer;
     
@@ -704,23 +705,28 @@ void PopulateCustomers(Customer customers[]) {
         cout << "Could not open Customers.txt" << endl;
     }//end if
     
-    getline(FS, loopCount); // The number of customers to iterate through.
-    while (loopCount.size() > 0) {
+    int i = 0;
+    while (loopCount > 0) {
         // get info from file and convert strings into nums if needed
-        getline(FS, name);
-        getline(FS, email);
-        getline(FS, phone);
-        getline(FS, isBuyerStr);
-        isBuyer = isBuyerStr == "true";
-        //getline(FS, vin); // nobody has bought cars yet
+        getline(FS, name, ',');
+        getline(FS, email, ',');
+        getline(FS, phone, ',');
+        getline(FS, isBuyerStr, ',');
+        //getline(FS, vin); // Note: Nobody has bought cars yet.
         
-        Customer currCustomer(name, email, phone, isBuyer, vin); // creates Customer object to store data in
+        // Creates Customer object to store data in:
+        Customer currCustomer;//(name, email, phone, isBuyer, vin);
+        currCustomer.setName(name);
+        currCustomer.setEmail(email);
+        currCustomer.setPhone(phone);
+        //currCustomer.purchase();
+        currCustomer.setIsBuyer(isBuyer);
+        
         customers[i] = currCustomer; // Customer gets put into the array at i
         i++;
-        getline(FS, loopCount);
     }//end while
     
-    FS.close(); // close file when done
+    FS.close(); // closes file when done
     return;
 }//end PopulateCustomers
 
