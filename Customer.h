@@ -2,7 +2,6 @@
 #define customer_h
 
 #include <string>
-
 using namespace std;
 
 class Customer {
@@ -22,6 +21,7 @@ class Customer {
    string getName();
    string getEmail();
    string getPhone();
+   string getCar();
    bool getIsBuyer();
    
    private:
