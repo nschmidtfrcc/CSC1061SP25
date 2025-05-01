@@ -160,15 +160,12 @@ Ignore the entirety of Stash, it is not within the scope of this project.
 
 ## Commands
 
-When you first come into class and you want to pull the latest files from the class main:
+When you first come into class and you want to pull the latest files from the class main, warning - any local changes will be lost:
 
 ~~~
 cd <to your project directory>
 git fetch
-git checkout main
-git pull
-git checkout <your branch name>
-git merge main
+git reset --hard origin/main
 ~~~
 
 Saving your changes and pushing to your remote branch for submission, this is a two-step process:
@@ -194,15 +191,34 @@ Double check all looks good and inline:
 ~~~
 git lg -10
 ~~~
+Lastly, create a pull request so the merge team can review you submission.
 
 
 ## Some useful custom commands 
 
+To view the last 10 commits, add the following alias:
 ~~~
 git config --global alias.lg "log --all --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'"
 ~~~
 **Usage:**
-View the last 10 commits
 ~~~
 git lg -10 
+~~~
+To reset your local branch to match remote <branch entered>, add the following alias:
+~~~
+git config --global alias.reset-to '!f() { \
+  if [ -z "$1" ]; then echo "Usage: git reset-to <branch>"; exit 1; fi; \
+  echo "WARNING: This will hard reset your current local branch to remote \"$1\". All local changes will be lost."; \
+  read -p "Are you sure? (yes/no): " confirm; \
+  if [ "$confirm" = "yes" ]; then \
+    git fetch origin "$1" 2>/dev/null; \
+    git reset --hard origin/"$1"; \
+  else \
+    echo "Reset cancelled."; \
+  fi; \
+}; f'
+~~~
+**Usage:**
+~~~
+git reset-to main
 ~~~
