@@ -159,7 +159,7 @@ Output: an integer ranging from 1-6 (inclusive)
 */
 int displayMenu() {
     // variable for user input IS
-    string choice = "0";
+    int choice;
     // following six lines display menu IS
     cout << "1. Display Available Car Information" << endl;
     cout << "2. Display Sold Car Information" << endl;
@@ -168,19 +168,13 @@ int displayMenu() {
     cout << "5. Display Gross Sales" << endl;
     cout << "6. Exit Program" << endl;
     cout << "Enter choice as integer: ";
-    //get user input and get the size of variable. VI
-    getline(cin, choice);
-    int choiceLength = choice.length();
-    // While loop executes until choice is a single digit within range of menu choices. VI
-    while ((choiceLength < 1) || (choiceLength > 1) || (!isdigit(choice.at(0))) || (stoi(choice) > 6) || (stoi(choice) < 1)) {
-        cout << "Please enter an integer 1-6:";
-        getline(cin, choice);
-        choiceLength = choice.length();
+   
+    // While loop executes until choice is an integer between 1 and 6. VI
+    while (!(cin >> choice) || (choice < 1) || (choice > 6)) {
+        cout << "Please enter an integer 1-6: ";
     }// end while IS
   
-    // Now that input has been validated as a menu choice, convert to int. VI
-    int validatedChoice = stoi(choice);
-    return validatedChoice;
+    return choice;
   
 }// end menuDisplay IS
 
