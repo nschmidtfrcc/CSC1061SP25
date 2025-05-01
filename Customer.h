@@ -23,6 +23,7 @@ class Customer {
    string getEmail();
    string getPhone();
    bool getIsBuyer();
+   string getCar();
    
    private:
    string name;

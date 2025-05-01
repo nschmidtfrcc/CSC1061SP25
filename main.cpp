@@ -199,7 +199,7 @@ void PopulateInventory(Car unsoldCars[]) {
     ifstream inFS;
     int currIndex = 0, year = 0;
     double price = 0;
-    string make, model, vin, loopCount, yearString, priceString;
+    string make, model, vin, loopCount, yearString, priceString, color;
     //Open car inventory file to get input from-LC
     inFS.open("CarInventory.txt");
     //Check if file opened successfully -LC
@@ -217,8 +217,9 @@ void PopulateInventory(Car unsoldCars[]) {
         getline(inFS, make);
         getline(inFS, model);
         getline(inFS, vin);
+        getline(inFS, color);
         //creates car variable to store data in-LC
-        Car currCar(price, year, make, model, true, vin);
+        Car currCar(price, year, make, model, true, vin, color);
         //car gets put into the array at currIndex-LC
         unsoldCars[currIndex] = currCar;
         //Increment currIndex for next iteration of loop -LC
@@ -233,9 +234,10 @@ void PopulateInventory(Car unsoldCars[]) {
 // Kyle Kuchle
 void markCarAsSold(Car unsoldCars[], Car soldCars[]) {  
    int carSize = 10;
+   string carVin;
    cout << "Please enter the vin number for the car you want to buy: " << endl;
    cin >> carVin;
-    for (int ii = 0; ii < size; ++ii) {
+    for (int ii = 0; ii < carSize; ++ii) {
             if (unsoldCars[ii].getVin() == carVin) {
                 soldCars[ii] = unsoldCars[ii]; // update soldCars array
                 unsoldCars[ii].clearCar(); // calls clearCar function 
