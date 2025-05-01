@@ -8,9 +8,38 @@
 using namespace std;
 
 void PopulateCustomers(Customer customers[]);
-void displayCustomerList(Customer customers[],int customerCount);
 void linkCustomersToCars(Customer customers[], int custCount,
                          Car      soldCars[],  int carCount); 
+
+/*--------------------- Anh Huy Nguyen------------------------------
+Function: displayCustomerList
+ Input: 
+ - The array of customers and the size of it
+ Process: 
+  - Calls PopulateCustomers() to read customers data from "Customers.txt"
+  - Iterates through the loaded customers
+  - Check which customer is a buyer or not by calling getIsBuyer()
+  - Calls the customerData() method on each customers  to print their information
+-
+- Output: 
+   - Prints the list of customers and potential buyers to the console 
+-------------------------------------------------------------------*/
+void displayCustomerList(Customer customers[],int customerCount) {
+    PopulateCustomers(customers);
+    cout << "\n--- Customer List ---\n";
+    for (int i=0; i< customerCount;++i) {
+      if(customers[i].getIsBuyer()){
+        customers[i].customerData();
+      } // end if
+    }// end for
+    cout <<"\n---- Potential Customer List---\n";
+    for (int i=0; i< customerCount;++i) {
+      if(!customers[i].getIsBuyer()){
+        customers[i].customerData();
+      } // end if
+    }// end for
+    return;
+}// End displayCustomerList
 
 /*     displayCarInfo           --Isaiah Fite--
 Parameters: The function expects a list of cars
@@ -398,23 +427,4 @@ void linkCustomersToCars(Customer customers[], int custCount,
     } 
 } 
 
-/*--------------------- Anh Huy Nguyen------------------------------
-Function: displayCustomerList
- Input: 
- - The array of customers and the size of it
- Process: 
-  - Calls PopulateCustomers() to read customers data from "Customers.txt"
-  - Iterates through the loaded customers
-  - Calls the customerData() method on each customers  to print their information
--
-- Output: 
-   - Prints the list of customers and potential buyers to the console 
--------------------------------------------------------------------*/
-void displayCustomerList(Customer customers[],int customerCount) {
-    PopulateCustomers(customers);
-    cout << "\n--- Customer & Potential Buyer List ---\n";
-    for (int i=0; i< customerCount,++i) {
-        customers[i].customerData();
-    }
-    cout << endl;
-}
+
