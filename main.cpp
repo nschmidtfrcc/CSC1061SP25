@@ -9,7 +9,8 @@ using namespace std;
 
 void PopulateCustomers(Customer customers[]);
 void displayCustomerList(Customer customers[],int customerCount);
-void linkCustomerToTheCar();
+void linkCustomersToCars(Customer customers[], int custCount,
+                         Car      soldCars[],  int carCount); 
 
 /*     displayCarInfo           --Isaiah Fite--
 Parameters: The function expects a list of cars
