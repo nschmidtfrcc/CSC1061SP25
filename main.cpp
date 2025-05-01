@@ -199,7 +199,7 @@ void PopulateInventory(Car unsoldCars[]) {
     ifstream inFS;
     int currIndex = 0, year = 0;
     double price = 0;
-    string make, model, vin, loopCount, yearString, priceString;
+    string make, model, vin, loopCount, yearString, priceString, color;
     //Open car inventory file to get input from-LC
     inFS.open("CarInventory.txt");
     //Check if file opened successfully -LC
@@ -217,8 +217,9 @@ void PopulateInventory(Car unsoldCars[]) {
         getline(inFS, make);
         getline(inFS, model);
         getline(inFS, vin);
+        getline(inFS, color);
         //creates car variable to store data in-LC
-        Car currCar(price, year, make, model, true, vin);
+        Car currCar(price, year, make, model, true, vin, color);
         //car gets put into the array at currIndex-LC
         unsoldCars[currIndex] = currCar;
         //Increment currIndex for next iteration of loop -LC
