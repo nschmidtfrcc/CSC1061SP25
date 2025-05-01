@@ -60,8 +60,18 @@ void displayGrossSales(double totalSales) { // void function to display gross sa
    Process: The function loops through the array of cars and compares the search criterion with the car's properties.
    Return: It prints the details of the cars that match the search criteria.
 */
+
+int getChoice(int max) {
+   cout << "Enter choice (1-" << max << "): ";
+   int choice;
+   // While loop executes until choice is an integer between 1 and max
+   while (!(cin >> choice) || (choice < 1) || (choice > max)) {
+      cout << "Please enter an integer 1-" << max << ": ";
+   } // End while
+   return choice;
+}
+
 void searchInventory(Car list[]) {
-    string searchChoice = "0";
     string searchMake, searchModel, searchVin;
     int searchYear;
     int size = 10;
@@ -72,79 +82,66 @@ void searchInventory(Car list[]) {
     cout << "2. Model" << endl;
     cout << "3. Year" << endl;
     cout << "4. VIN" << endl;
-    cout << "Enter choice (1-4): ";
-    //get user input and get the size of variable. VI
-    getline(cin, searchChoice);
-    int searchChoiceLength = searchChoice.length();
-    // While loop executes until choice is a single digit within range of menu choices. VI
-    while ((searchChoiceLength < 1) || (searchChoiceLength > 1) || (!isdigit(searchChoice.at(0))) || (stoi(searchChoice) > 4) || (stoi(searchChoice) < 1)) {
-        cout << "Please enter an integer 1-4:";
-        getline(cin, searchChoice);
-        searchChoiceLength = searchChoice.length();
-    }// end while VI
-    // Now that input has been validated as a menu choice, convert to int. VI
-    int validSearchChoice = stoi(searchChoice);
-    if (validSearchChoice == 1) {
-        // Search by make
-        cout << "Enter car make: ";
-        cin.ignore();  // To ignore any leftover newline character
-        getline(cin, searchMake);
-        //Iterates through the list to find searched for car
-        for (int i = 0; i < size; ++i) {
+    // Get the user input as a choice from 1-4
+    int choice = getChoice(4);
+    switch(choice) {
+       case 1:
+         // Search by make
+         cout << "Enter car make: ";
+         cin.ignore();  // To ignore any leftover newline character
+         getline(cin, searchMake);
+         //Iterates through the list to find searched for car
+         for (int i = 0; i < size; ++i) {
             if (list[i].getMake() == searchMake) {
                 list[i].carDetails();
                 found = true;
-            }//end if
-        }//end for
-
-    }
-    else if (validSearchChoice == 2) {
-        // Search by model
-        cout << "Enter car model: ";
-        cin.ignore();  // To ignore any leftover newline character
-        getline(cin, searchModel);
-        //Iterates through the list to find searched for car
-        for (int i = 0; i < size; ++i) {
+            } // End if
+         } // End for
+         break;
+      case 2:
+         // Search by model
+         cout << "Enter car model: ";
+         cin.ignore();  // To ignore any leftover newline character
+         getline(cin, searchModel);
+         // Iterates through the list to find searched for car
+         for (int i = 0; i < size; ++i) {
             if (list[i].getModel() == searchModel) {
                 list[i].carDetails();
                 found = true;
-            }//end if
-        }//end for
-    }//end else if
-    else if (validSearchChoice == 3) {
-        // Search by year
-        cout << "Enter car year: ";
-        cin >> searchYear;
-        //Iterates through the list to find searched for car
-        for (int i = 0; i < size; ++i) {
+            } // End if
+         } // End for
+         break;
+      case 3:
+         // Search by year
+         cout << "Enter car year: ";
+         cin >> searchYear;
+         // Iterates through the list to find searched for car
+         for (int i = 0; i < size; ++i) {
             if (list[i].getYear() == searchYear) {
                 list[i].carDetails();
                 found = true;
-            }//end if
-        }//end for
-    }//end else if
-    else if (validSearchChoice == 4) {
-        // Search by VIN
-        cout << "Enter car VIN: ";
-        cin >> searchVin;
-        //Iterates through the list to find searched for car
-        for (int i = 0; i < size; ++i) {
+            } // End if
+         } // End for
+         break;
+      case 4:
+         // Search by VIN
+         cout << "Enter car VIN: ";
+         cin >> searchVin;
+         // Iterates through the list to find searched for car
+         for (int i = 0; i < size; ++i) {
             if (list[i].getVin() == searchVin) {
                 list[i].carDetails();
                 found = true;
-            }//if
-        }//end for
-    }//end else if
-    else {
-        cout << "Invalid search choice. Please enter 1, 2,3, or 4." << endl;
-    }//end else
+            }// End if
+         }// End for
+    } // End switch, No other value should be reachable, as getChoice already guarantees an in-range return value
 
     if (!found) {
         cout << "No cars found based on search" << endl;
-    }//end if
-    //Function returns void 
+    } // End if
+    // Function returns void 
     return;
-}// ends search function
+} // End search function
 
 /* displayMenu
 Name: Isaac Seyer
@@ -155,28 +152,19 @@ Process: The function first initializes the variable to store the user's choice,
 the user's input and checks if it is a valid answer. If it is not, the function asks for the user's input again and clarifies what
 are valid inputs, then checks again. If the input is valid, it returns the user's input;
 
-Output: an integer ranging from 1-6 (inclusive)
+Output: An integer ranging from 1-6 (inclusive)
 */
 int displayMenu() {
-    // variable for user input IS
-    int choice;
-    // following six lines display menu IS
-    cout << "1. Display Available Car Information" << endl;
-    cout << "2. Display Sold Car Information" << endl;
-    cout << "3. Search Available Inventory" << endl;
-    cout << "4. Sell Car" << endl;
-    cout << "5. Display Gross Sales" << endl;
-    cout << "6. Exit Program" << endl;
-    cout << "Enter choice as integer: ";
+   // Following six lines display menu IS
+   cout << "1. Display Available Car Information" << endl;
+   cout << "2. Display Sold Car Information" << endl;
+   cout << "3. Search Available Inventory" << endl;
+   cout << "4. Sell Car" << endl;
+   cout << "5. Display Gross Sales" << endl;
+   cout << "6. Exit Program" << endl;
    
-    // While loop executes until choice is an integer between 1 and 6. VI
-    while (!(cin >> choice) || (choice < 1) || (choice > 6)) {
-        cout << "Please enter an integer 1-6: ";
-    }// end while IS
-  
-    return choice;
-  
-}// end menuDisplay IS
+   return getChoice(6);
+} // End menuDisplay IS
 
 //PopulateInventory: Lexi Cocaign
 //Input:Gets array from main to put info into-LC
