@@ -369,14 +369,21 @@ void PopulateCustomers(Customer customers[]) {
 }//end PopulateCustomers
 
 // Author: Chitra Youm 
-void linkCustomerToTheCar() { 
-    if (isBuyer) { 
-        customers.getName(); 
-        soldCars.getVin(); 
-        displayCarInfo(list[]); 
-    } // End if 
-    return; 
-} // End linkCustomerToTheCar 
+void linkCustomersToCars(Customer customers[], int custCount, Car soldCars[], int carCount){
+    for (int ii = 0; ii < custCount; ++ii) {
+        if (!customers[ii].isBuyer())
+            continue; // skip who isn't a buyer 
+
+        // find the matching Car in soldCars[]
+        for (int jj = 0; jj < carCount; ++jj) {
+            if (soldCars[jj].getVin() == customers[ii].getPurchasedVin) {
+                // link both ways
+                soldCars[jj].setSold(true);
+                customers[ii].setIsBuyer(true);
+            }
+        }
+    }
+}// end linkCustomersToCars
 
 /*--------------------- Anh Huy Nguyen------------------------------
 Function: displayCustomerList
