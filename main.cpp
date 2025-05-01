@@ -330,7 +330,7 @@ int main(int argc, char* argv[]) {
  * PROCESS: Populating the customers from the "Customers.txt" file.
  * RETURN VALUE: None.
  */
-void PopulateCustomers(Customer customers[]) {
+void PopulateCustomers(Customer customers[]) { // Use with a pointer.
     ifstream FS;
     string isBuyerStr;
     int loopCount = 10; // The number of customers to iterate through. // Temp.
