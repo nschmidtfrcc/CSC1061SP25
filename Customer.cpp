@@ -43,11 +43,7 @@ string Customer::getPhone() { return phone; }// end getPhone
 // Process: check if the customer is a buyer or prospect
 // Return: return true if the customer is a buyer, false if the customer is a prospect
 bool Customer::checkIfCustomerIsBuyer() {
-    if (isBuyer) {
-        return true;
-    } else {
-        return false;
-    }
+    return isBuyer;
 } //end checkIfCustomerIsBuyer()
 
 // Author: Steven Albarracin
