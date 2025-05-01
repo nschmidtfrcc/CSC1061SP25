@@ -8,8 +8,8 @@
 using namespace std;
 
 void PopulateCustomers(Customer customers[]);
-
-void linkCustomerToTheCar();
+void linkCustomersToCars(Customer customers[], int custCount,
+                         Car      soldCars[],  int carCount); 
 
 /*--------------------- Anh Huy Nguyen------------------------------
 Function: displayCustomerList
@@ -40,6 +40,7 @@ void displayCustomerList(Customer customers[],int customerCount) {
     }// end for
     return;
 }// End displayCustomerList
+
 /*     displayCarInfo           --Isaiah Fite--
 Parameters: The function expects a list of cars
 
@@ -261,18 +262,18 @@ void PopulateInventory(Car unsoldCars[]) {
 
 // Kyle Kuchle
 void markCarAsSold(Car unsoldCars[], Car soldCars[]) {  
-   int carSize = 10;
+   int carSize = sizeof(unsoldCars)/ sizeof(unsoldCars[0]);//Changed size to be calculated Calvin D
+   Car blankCar();
+   string carVin;
    cout << "Please enter the vin number for the car you want to buy: " << endl;
    cin >> carVin;
-    for (int ii = 0; ii < size; ++ii) {
-            if (unsoldCars[ii].getVin() == carVin) {
-                soldCars[ii] = unsoldCars[ii]; // update soldCars array
-                unsoldCars[ii].clearCar(); // calls clearCar function 
-                calculateTotalSales(Car soldCars[], carSize);
-            } else {
-            cout << "No car vin found. Please enter a new car vin: " << endl;
-            cin >> carVin;
-        } // end for KK
+   for (int ii = 0; ii < carSize; ++ii) {
+      if (unsoldCars[ii].getVin() == carVin) {
+         soldCars[ii] = unsoldCars[ii]; // update soldCars array
+         unsoldCars[ii] = blankCar; // clears car space in unsoldCars 
+         calculateTotalSales(Car soldCars[], carSize);
+      }
+   } // end for KK
 } // end returnCarSold KK
 
 /*     CarDealershipMain
@@ -398,13 +399,32 @@ void PopulateCustomers(Customer customers[]) {
 }//end PopulateCustomers
 
 // Author: Chitra Youm 
-void linkCustomerToTheCar() { 
-    if (isBuyer) { 
-        customers.getName(); 
-        soldCars.getVin(); 
-        displayCarInfo(list[]); 
-    } // End if 
-    return; 
-} // End linkCustomerToTheCar 
+// Link every buying customer to the car they purchased.        
+void linkCustomersToCars(Customer customers[], int custCount,
+                         Car      soldCars[],  int carCount)
+{ 
+    for (int ii = 0; ii < custCount; ++ii) { 
+        if (!customers[ii].getIsBuyer()) 
+            continue; // skip who isn't a buyer 
+        string custVin = customers[ii].getPurchasedVin(); 
+        bool linked = false; // When the car wasn't linked to a customer yet. 
+
+        // find the matching Car in soldCars[] 
+        for (int jj = 0; jj < carCount; ++jj) { 
+            if (soldCars[jj].getVin() == custVin) { 
+                // link both ways 
+                customers[ii].purchase(custVin); 
+                customers[ii].setIsBuyer(true); 
+                soldCars[jj].setSold(true); 
+                linked = true; 
+            } 
+        } 
+        if (!linked) { 
+            cout << "Buyer " << customer[ii].getName() 
+                 << " has Vin " << custVin 
+                 << " but no matching car was found.\n" << endl; 
+        } 
+    } 
+} 
 
 
