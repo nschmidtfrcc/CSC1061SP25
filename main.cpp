@@ -369,21 +369,33 @@ void PopulateCustomers(Customer customers[]) {
 }//end PopulateCustomers
 
 // Author: Chitra Youm 
-void linkCustomersToCars(Customer customers[], int custCount, Car soldCars[], int carCount){
-    for (int ii = 0; ii < custCount; ++ii) {
-        if (!customers[ii].isBuyer())
+// Link every buying customer to the car they purchased.        
+void linkCustomersToCars(Customer customers[], int custCount,
+                         Car      soldCars[],  int carCount)
+{ 
+    for (int ii = 0; ii < custCount; ++ii) { 
+        if (!customers[ii].getIsBuyer()) 
             continue; // skip who isn't a buyer 
+        string custVin = customers[ii].getPurchasedVin(); 
+        bool linked = false; // When the car wasn't linked to a customer yet. 
 
-        // find the matching Car in soldCars[]
-        for (int jj = 0; jj < carCount; ++jj) {
-            if (soldCars[jj].getVin() == customers[ii].getPurchasedVin) {
-                // link both ways
-                soldCars[jj].setSold(true);
-                customers[ii].setIsBuyer(true);
-            }
-        }
-    }
-}// end linkCustomersToCars
+        // find the matching Car in soldCars[] 
+        for (int jj = 0; jj < carCount; ++jj) { 
+            if (soldCars[jj].getVin() == custVin) { 
+                // link both ways 
+                customers[ii].purchase(custVin); 
+                customers[ii].setIsBuyer(true); 
+                soldCars[jj].setSold(true); 
+                linked = true; 
+            } 
+        } 
+        if (!linked) { 
+            cout << "Buyer " << customer[ii].getName() 
+                 << " has Vin " << custVin 
+                 << " but no matching car was found.\n" << endl; 
+        } 
+    } 
+} 
 
 /*--------------------- Anh Huy Nguyen------------------------------
 Function: displayCustomerList
