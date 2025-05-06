@@ -368,7 +368,7 @@ void PopulateCustomers(Customer customers[]) { // Use with a pointer.
     string isBuyerStr;
     int loopCount = 10; // The number of customers to iterate through. // Temp.
     string name, email, phone, vin = "";
-    bool isBuyer;
+    bool isBuyer = false; // Default value.
     
     FS.open("Customers.txt"); // Note: Make sure name is right.
     
@@ -377,7 +377,7 @@ void PopulateCustomers(Customer customers[]) { // Use with a pointer.
     }//end if
     
     int i = 0;
-    while (loopCount > 0) {
+    while (i < loopCount) { // Loop through the file.
         // get info from file and convert strings into nums if needed
         getline(FS, name, ',');
         getline(FS, email, ',');
@@ -409,7 +409,7 @@ void linkCustomersToCars(Customer customers[], int custCount,
     for (int ii = 0; ii < custCount; ++ii) { 
         if (!customers[ii].getIsBuyer()) 
             continue; // skip who isn't a buyer 
-        string custVin = customers[ii].getPurchasedVin(); 
+        string custVin = customers[ii].getCar(); 
         bool linked = false; // When the car wasn't linked to a customer yet. 
 
         // find the matching Car in soldCars[] 
@@ -423,7 +423,7 @@ void linkCustomersToCars(Customer customers[], int custCount,
             } 
         } 
         if (!linked) { 
-            cout << "Buyer " << customer[ii].getName() 
+            cout << "Buyer " << customers[ii].getName() 
                  << " has Vin " << custVin 
                  << " but no matching car was found.\n" << endl; 
         } 
