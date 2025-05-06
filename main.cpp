@@ -264,16 +264,18 @@ void PopulateInventory(Car unsoldCars[]) {
 // Kyle Kuchle
 void markCarAsSold(Car unsoldCars[], Car soldCars[]) {  
    int carSize = sizeof(unsoldCars)/ sizeof(unsoldCars[0]);//Changed size to be calculated Calvin D
-   Car blankCar();
    string carVin;
    cout << "Please enter the vin number for the car you want to buy: " << endl;
    cin >> carVin;
    for (int ii = 0; ii < carSize; ++ii) {
-      if (unsoldCars[ii].getVin() == carVin) {
-         soldCars[ii] = unsoldCars[ii]; // update soldCars array
-         unsoldCars[ii] = blankCar; // clears car space in unsoldCars 
-         calculateTotalSales(Car soldCars[], carSize);
-      }
+        if (unsoldCars[ii].getVin() == carVin) {
+            soldCars[ii] = unsoldCars[ii]; // update soldCars array
+            unsoldCars[ii] = Car(); // Reset the car object to a default state
+            calculateTotalSales(soldCars, carSize);
+        } else {
+            cout << "No car vin found. Please enter a new car vin: " << endl;
+            cin >> carVin;
+        }
    } // end for KK
 } // end returnCarSold KK
 
