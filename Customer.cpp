@@ -14,7 +14,7 @@ Customer::Customer() {
    phone = "X";
    VIN = "X";
    isBuyer = false;
-   cout << "WARNING: Customer Data is Null" << endl;
+//    cout << "WARNING: Customer Data is Null" << endl;
 }//end Customer default constructor
 
 

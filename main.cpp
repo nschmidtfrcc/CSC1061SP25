@@ -267,7 +267,7 @@ void PopulateInventory(Car unsoldCars[]) {
 
 // Kyle Kuchle
 void markCarAsSold(Car unsoldCars[], Car soldCars[]) {  
-   int carSize = sizeof(*unsoldCars)/ sizeof(unsoldCars[0]);//Changed size to be calculated Calvin D
+   int carSize = 10;
    string carVin;
    cout << "Please enter the vin number for the car you want to buy: " << endl;
    cin >> carVin;
@@ -372,7 +372,7 @@ void PopulateCustomers(Customer customers[]) { // Use with a pointer.
     string isBuyerStr;
     int loopCount = 10; // The number of customers to iterate through. // Temp.
     string name, email, phone, vin = "";
-    bool isBuyer;
+    bool isBuyer = false;
     
     FS.open("Customers.txt"); // Note: Make sure name is right.
     
@@ -404,5 +404,3 @@ void PopulateCustomers(Customer customers[]) { // Use with a pointer.
     FS.close(); // closes file when done
     return;
 }//end PopulateCustomers
-
-
