@@ -245,10 +245,10 @@ void markCarAsSold(Car unsoldCars[], Car soldCars[], Customers name) {
             cin >> carVin;
         } // end for KK
     }
-      // Linking Customer to Car 
+      // Linking Customer to Car - Chitra Youm
       for (Customers new : Customers) { 
         if (new.getName() == name) { 
-          name.purchase(vin); 
+          new.purchase(vin); 
         } // End if - CY 
       } // End for - CY 
               
