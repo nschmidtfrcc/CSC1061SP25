@@ -97,90 +97,94 @@ void displayGrossSales(double totalSales) { // void function to display gross sa
 */
 void searchInventory(Car list[]) {
     string searchChoice = "0";
-    string searchMake, searchModel, searchVin;
     int searchYear;
     int size = 10;
     bool found = false;
-    // Ask the user for the search criterion
-    cout << "Search by: " << endl;
-    cout << "1. Make" << endl;
-    cout << "2. Model" << endl;
-    cout << "3. Year" << endl;
-    cout << "4. VIN" << endl;
-    cout << "Enter choice (1-4): ";
-    //get user input and get the size of variable. VI
-    getline(cin, searchChoice);
-    int searchChoiceLength = searchChoice.length();
-    // While loop executes until choice is a single digit within range of menu choices. VI
-    while ((searchChoiceLength < 1) || (searchChoiceLength > 1) || (!isdigit(searchChoice.at(0))) || (stoi(searchChoice) > 4) || (stoi(searchChoice) < 1)) {
-        cout << "Please enter an integer 1-4:";
-        getline(cin, searchChoice);
-        searchChoiceLength = searchChoice.length();
-    }// end while VI
-    // Now that input has been validated as a menu choice, convert to int. VI
-    int validSearchChoice = stoi(searchChoice);
-    if (validSearchChoice == 1) {
-        // Search by make
-        cout << "Enter car make: ";
-        cin.ignore();  // To ignore any leftover newline character
-        getline(cin, searchMake);
-        //Iterates through the list to find searched for car
-        for (int i = 0; i < size; ++i) {
-            if (list[i].getMake() == searchMake) {
-                list[i].carDetails();
-                found = true;
-            }//end if
-        }//end for
-
-    }
-    else if (validSearchChoice == 2) {
-        // Search by model
-        cout << "Enter car model: ";
-        cin.ignore();  // To ignore any leftover newline character
-        getline(cin, searchModel);
-        //Iterates through the list to find searched for car
-        for (int i = 0; i < size; ++i) {
-            if (list[i].getModel() == searchModel) {
-                list[i].carDetails();
-                found = true;
-            }//end if
-        }//end for
-    }//end else if
-    else if (validSearchChoice == 3) {
-        // Search by year
-        cout << "Enter car year: ";
-        cin >> searchYear;
-        //Iterates through the list to find searched for car
-        for (int i = 0; i < size; ++i) {
-            if (list[i].getYear() == searchYear) {
-                list[i].carDetails();
-                found = true;
-            }//end if
-        }//end for
-    }//end else if
-    else if (validSearchChoice == 4) {
-        // Search by VIN
-        cout << "Enter car VIN: ";
-        cin >> searchVin;
-        //Iterates through the list to find searched for car
-        for (int i = 0; i < size; ++i) {
-            if (list[i].getVin() == searchVin) {
-                list[i].carDetails();
-                found = true;
-            }//if
-        }//end for
-    }//end else if
-    else {
-        cout << "Invalid search choice. Please enter 1, 2,3, or 4." << endl;
-    }//end else
-
-    if (!found) {
-        cout << "No cars found based on search" << endl;
-    }//end if
+    while (found == false) {
+       // Ask the user for the search criterion
+       cout << "Search by: " << endl;
+       cout << "1. Make" << endl;
+       cout << "2. Model" << endl;
+       cout << "3. Year" << endl;
+       cout << "4. VIN" << endl;
+       cout << "5. Quit Search" << endl;
+       cout << "Enter choice (1-5): ";
+       //get user input and get the size of variable. VI
+       getline(cin, searchChoice);
+       int searchChoiceLength = searchChoice.length();
+       // While loop executes until choice is a single digit within range of menu choices. VI
+       while ((searchChoiceLength < 1) || (searchChoiceLength > 1) || (!isdigit(searchChoice.at(0))) || (stoi(searchChoice) > 5) || (stoi(searchChoice) < 1)) {
+           cout << "Please enter an integer 1-5:";
+           getline(cin, searchChoice);
+           searchChoiceLength = searchChoice.length();
+       }// end while VI
+       // Now that input has been validated as a menu choice, convert to int. VI
+       int validSearchChoice = stoi(searchChoice);
+       switch(validSearchChoice) {
+         case 1:
+           // Search by make
+           cout << "Enter car make: ";
+           //cin.ignore();  // To ignore any leftover newline character
+           getline(cin, searchChoice);
+           //Iterates through the list to find searched for car
+           for (int i = 0; i < size; ++i) {
+               if (list[i].getMake() == searchChoice) {
+                   list[i].carDetails();
+                   found = true;
+               }//end if
+           }//end for
+           break;
+         case 2:
+           // Search by model
+           cout << "Enter car model: ";
+           //cin.ignore();  // To ignore any leftover newline character
+           getline(cin, searchChoice);
+           //Iterates through the list to find searched for car
+           for (int i = 0; i < size; ++i) {
+               if (list[i].getModel() == searchChoice) {
+                   list[i].carDetails();
+                   found = true;
+               }//end if
+           }//end for
+           break;
+         case 3:
+           // Search by year
+           cout << "Enter car year: ";
+           cin >> searchYear;
+           //Iterates through the list to find searched for car
+           for (int i = 0; i < size; ++i) {
+               if (list[i].getYear() == searchYear) {
+                   list[i].carDetails();
+                   found = true;
+               }//end if
+           }//end for
+           break;
+         case 4:
+           // Search by VIN
+           cout << "Enter car VIN: ";
+           cin >> searchChoice;
+           //Iterates through the list to find searched for car
+           for (int i = 0; i < size; ++i) {
+               if (list[i].getVin() == searchChoice) {
+                   list[i].carDetails();
+                   found = true;
+               }//if
+           }//end for
+           break;
+         case 5:
+            cout << "Search finished." << endl;
+            found = true;
+            break;
+         default:
+           cout << "Invalid search choice. Please enter 1, 2,3, or 4." << endl;
+       }//end switch
+       if (!found) {
+           cout << "No cars found based on search" << endl;
+       }//end if
+    }//end while
     //Function returns void 
     return;
 }// ends search function
-
 /* displayMenu
 Name: Isaac Seyer
 Name: Victor Ibarra
@@ -263,7 +267,7 @@ void PopulateInventory(Car unsoldCars[]) {
 
 // Kyle Kuchle
 void markCarAsSold(Car unsoldCars[], Car soldCars[]) {  
-   int carSize = sizeof(unsoldCars)/ sizeof(unsoldCars[0]);//Changed size to be calculated Calvin D
+   int carSize = sizeof(*unsoldCars)/ sizeof(unsoldCars[0]);//Changed size to be calculated Calvin D
    string carVin;
    cout << "Please enter the vin number for the car you want to buy: " << endl;
    cin >> carVin;
@@ -377,7 +381,7 @@ void PopulateCustomers(Customer customers[]) { // Use with a pointer.
     }//end if
     
     int i = 0;
-    while (loopCount > 0) {
+    while (i < loopCount) {
         // get info from file and convert strings into nums if needed
         getline(FS, name, ',');
         getline(FS, email, ',');
@@ -400,34 +404,5 @@ void PopulateCustomers(Customer customers[]) { // Use with a pointer.
     FS.close(); // closes file when done
     return;
 }//end PopulateCustomers
-
-// Author: Chitra Youm 
-// Link every buying customer to the car they purchased.        
-void linkCustomersToCars(Customer customers[], int custCount,
-                         Car      soldCars[],  int carCount)
-{ 
-    for (int ii = 0; ii < custCount; ++ii) { 
-        if (!customers[ii].getIsBuyer()) 
-            continue; // skip who isn't a buyer 
-        string custVin = customers[ii].getPurchasedVin(); 
-        bool linked = false; // When the car wasn't linked to a customer yet. 
-
-        // find the matching Car in soldCars[] 
-        for (int jj = 0; jj < carCount; ++jj) { 
-            if (soldCars[jj].getVin() == custVin) { 
-                // link both ways 
-                customers[ii].purchase(custVin); 
-                customers[ii].setIsBuyer(true); 
-                soldCars[jj].setSold(true); 
-                linked = true; 
-            } 
-        } 
-        if (!linked) { 
-            cout << "Buyer " << customer[ii].getName() 
-                 << " has Vin " << custVin 
-                 << " but no matching car was found.\n" << endl; 
-        } 
-    } 
-} 
 
 
