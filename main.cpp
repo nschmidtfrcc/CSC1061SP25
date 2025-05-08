@@ -263,7 +263,7 @@ void PopulateInventory(Car unsoldCars[]) {
 
 // Kyle Kuchle
 void markCarAsSold(Car unsoldCars[], Car soldCars[]) {  
-   int carSize = sizeof(unsoldCars)/ sizeof(unsoldCars[0]);//Changed size to be calculated Calvin D
+   int carSize = sizeof(*unsoldCars)/ sizeof(unsoldCars[0]);//Changed size to be calculated Calvin D
    string carVin;
    cout << "Please enter the vin number for the car you want to buy: " << endl;
    cin >> carVin;
@@ -377,7 +377,7 @@ void PopulateCustomers(Customer customers[]) { // Use with a pointer.
     }//end if
     
     int i = 0;
-    while (loopCount > i) {
+    while (i < loopCount) {
         // get info from file and convert strings into nums if needed
         getline(FS, name, ',');
         getline(FS, email, ',');

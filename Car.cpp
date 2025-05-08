@@ -92,7 +92,7 @@ void Car::setSold(bool sold) {
 
 void Car::setColor(string color) {
 	carColor = color;
-}
+} // end setColor(). NG
 
 ///// GETTERS /////
 
@@ -147,4 +147,4 @@ bool Car::getSold() {
 
 string Car::getColor() {
 	return carColor;
-}
+} // end getColor(). NG
