@@ -69,17 +69,20 @@ void Customer::setIsBuyer(bool buyer) { isBuyer = buyer; } //end setIsBuyer()
 //Process: Gets all customer data
 //Output: Prints all customer data
 void Customer::customerData() {
-   cout << "Name: " << name << endl;
-   cout << "Email: " << email << endl;
-   cout << "Phone Number: " << phone << endl;
-if(isBuyer==true){
-        cout << ", he is buyer" << endl;
-} else { cout << ", he is not buyer"<<endl;
-}// end if-else
-cout <<"VIN number: " << VIN << endl;
+   cout
+      << "Name: " << name << endl
+      << "Email: " << email << endl
+      << "Phone Number: " << phone << endl
+      << "Is ";
+   if (!isBuyer)
+      cout << "NOT ";
+   cout
+      << "Buyer" << endl
+      << "VIN number: " << VIN << endl;
 
-// not finished, need bought car data, etc.
-}// end customerData
+   // TODO: Where is the variable for the bought car
+   // boughtCar.carDetails();
+} // end customerData
 
 //Author: Sawyer Anderson
 //Input: None
