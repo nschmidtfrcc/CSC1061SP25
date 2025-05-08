@@ -232,7 +232,7 @@ void PopulateInventory(Car unsoldCars[]) {
 }//end PopulateInventory
 
 // Kyle Kuchle
-void markCarAsSold(Car unsoldCars[], Car soldCars[]) {  
+void markCarAsSold(Car unsoldCars[], Car soldCars[], Customers name) {  
    int carSize = 10;
    cout << "Please enter the vin number for the car you want to buy: " << endl;
    cin >> carVin;
@@ -245,6 +245,14 @@ void markCarAsSold(Car unsoldCars[], Car soldCars[]) {
             cout << "No car vin found. Please enter a new car vin: " << endl;
             cin >> carVin;
         } // end for KK
+    }
+      // Linking Customer to Car 
+      for (Customers new : Customers) { 
+        if (new.getName() == name) { 
+          name.purchase(vin); 
+        } // End if - CY 
+      } // End for - CY 
+              
 } // end returnCarSold KK
 
 /*     CarDealershipMain
@@ -368,35 +376,6 @@ void PopulateCustomers(Customer customers[]) {
     FS.close(); // closes file when done
     return;
 }//end PopulateCustomers
-
-// Author: Chitra Youm 
-// Link every buying customer to the car they purchased.        
-void linkCustomersToCars(Customer customers[], int custCount,
-                         Car      soldCars[],  int carCount)
-{ 
-    for (int ii = 0; ii < custCount; ++ii) { 
-        if (!customers[ii].getIsBuyer()) // If customer not a buyer. 
-            continue; // skip who isn't a buyer 
-        string custName = customers[ii].getName(); // Store purchased VIN in custVin 
-        bool linked = false; // When the car wasn't linked to a customer yet. 
-
-        // find the matching Car in soldCars[] 
-        for (int jj = 0; jj < carCount; ++jj) { 
-            if (soldCars[jj].getVin() == customers[ii].getVin()) { 
-                // link both ways 
-                customers[ii].purchase(custName); // Store the VIN in the customer's array for purchased car. 
-                customers[ii].setIsBuyer(true); // Set customer as purchased. 
-                soldCars[jj].setSold(true); // Set car as sold. 
-                linked = true; 
-            } // End inner if 
-        } // End inner for 
-        if (!linked) { // Display a message if the car is not linked. 
-            cout << "Buyer " << customers[ii].getName() 
-                 << " has Vin " << customers[ii].getVin() 
-                 << " but no matching car was found.\n" << endl; 
-        } // End if 
-    } // End outer for 
-} // End linkCustomtersToCars 
 
 /*--------------------- Anh Huy Nguyen------------------------------
 Function: displayCustomerList
