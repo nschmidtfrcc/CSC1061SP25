@@ -230,9 +230,10 @@ void PopulateInventory(Car unsoldCars[]) {
 }//end PopulateInventory
 
 // Kyle Kuchle
-void markCarAsSold(Car unsoldCars[], Car soldCars[], Customers name) {  
-   int carSize = 10;
-   cout << "Please enter the vin number for the car you want to buy: " << endl;
+void markCarAsSold(Car unsoldCars[], Car soldCars[], Customer customer[]) {  
+   int carSize = 10; 
+   string name; // CY 
+   cout << "Please enter the vin number for the car you want tos buy: " << endl;
    cin >> carVin;
     for (int ii = 0; ii < size; ++ii) {
             if (unsoldCars[ii].getVin() == carVin) {
@@ -244,9 +245,9 @@ void markCarAsSold(Car unsoldCars[], Car soldCars[], Customers name) {
         } // end for KK
     }
       // Linking Customer to Car - Chitra Youm
-      for (Customers new : Customers) { 
-        if (new.getName() == name) { 
-          new.purchase(vin); 
+      for (Customers newCar : Customers) { 
+        if (newCar.getName() == name) { 
+          newCar.purchase(vin); 
         } // End if - CY 
       } // End for - CY 
               
