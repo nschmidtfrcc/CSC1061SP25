@@ -377,7 +377,7 @@ void PopulateCustomers(Customer customers[]) { // Use with a pointer.
     }//end if
     
     int i = 0;
-    while (loopCount > i) {
+    while (i < loopCount) {
         // get info from file and convert strings into nums if needed
         getline(FS, name, ',');
         getline(FS, email, ',');
