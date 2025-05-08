@@ -112,10 +112,6 @@ bool Customer::getIsBuyer() { return isBuyer; } //end getIsBuyer()
 // Process: check if the customer is a buyer or prospect
 // Return: return true if the customer is a buyer, false if the customer is a prospect
 bool Customer::checkIfBuyer() {
-    if (isBuyer) {
-        return true;
-    } else {
-        return false;
-    }
+    return isBuyer;
 } //end checkIfBuyer()
 
