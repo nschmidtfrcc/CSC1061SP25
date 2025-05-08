@@ -160,12 +160,17 @@ Ignore the entirety of Stash, it is not within the scope of this project.
 
 ## Commands
 
-When you first come into class and you want to pull the latest files from the class main, warning - any local changes will be lost:
+When you first come into class and you want to pull the latest files from the class main, warning. Any local changes will be lost:
 
 ~~~
 cd <to your project directory>
+git checkout <your branchname here>
 git fetch
 git reset --hard origin/main
+~~~
+To see what branch you're in, (you're in the asterisk)
+~~~
+git branch
 ~~~
 
 Saving your changes and pushing to your remote branch for submission, this is a two-step process:
@@ -187,6 +192,10 @@ Push to your remote server
 ~~~
 git push 
 ~~~
+To force push to your remote server
+~~~
+git push -f
+~~~
 Double check all looks good and inline:
 ~~~
 git lg -10
@@ -204,7 +213,7 @@ git config --global alias.lg "log --all --color --graph --pretty=format:'%Cred%h
 ~~~
 git lg -10 
 ~~~
-To reset your local branch to match remote <branch entered>, add the following alias:
+Shortcut command to reset your local branch to match remote <branch entered>, add the following alias:
 ~~~
 git config --global alias.reset-to '!f() { \
   if [ -z "$1" ]; then echo "Usage: git reset-to <branch>"; exit 1; fi; \
