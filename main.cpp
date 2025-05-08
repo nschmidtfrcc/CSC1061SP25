@@ -239,7 +239,6 @@ void markCarAsSold(Car unsoldCars[], Car soldCars[], Customers name) {
     for (int ii = 0; ii < size; ++ii) {
             if (unsoldCars[ii].getVin() == carVin) {
                 soldCars[ii] = unsoldCars[ii]; // update soldCars array
-                unsoldCars[ii].clearCar(); // calls clearCar function 
                 calculateTotalSales(Car soldCars[], carSize);
             } else {
             cout << "No car vin found. Please enter a new car vin: " << endl;
@@ -311,7 +310,7 @@ int main(int argc, char* argv[]) {
             break;
         // Sell Car
         case 4:
-            markCarAsSold(unsoldCars, soldCars);
+            markCarAsSold(unsoldCars, soldCars, name);
             break;
         // Display Gross Sales
         case 5:
