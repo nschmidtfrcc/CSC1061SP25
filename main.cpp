@@ -89,6 +89,22 @@ void displayGrossSales(double totalSales) { // void function to display gross sa
     cout << " Total Gross Sales: " << totalSales << endl << endl;
 } //end void EP 
 
+
+/*
+  getChoice --Julian Tiemann--
+  Parameters: A maximum number to choose from, and the user input
+  Process: Will prompt the user for an integer choice, reprompting until a valid in-range value is aqcuired
+  Returns: The valid choice between 1 and max
+*/
+int getChoice(int max) {
+   cout << "Enter choice (1-" << max << "): ";
+   int choice;
+   // While loop executes until choice is an integer between 1 and max
+   while (!(cin >> choice) || (choice < 1) || (choice > max)) {
+      cout << "Please enter an integer 1-" << max << ": ";
+   } // End while
+   return choice;
+}
 /*
    searchInventory --Maria Lazarski--
    Parameters: The function expects an array of cars (either unsold or sold) and a search criterion (make, model, or year).
@@ -96,7 +112,6 @@ void displayGrossSales(double totalSales) { // void function to display gross sa
    Return: It prints the details of the cars that match the search criteria.
 */
 void searchInventory(Car list[]) {
-    string searchChoice = "0";
     string searchMake, searchModel, searchVin;
     int searchYear;
     int size = 10;
@@ -108,18 +123,12 @@ void searchInventory(Car list[]) {
     cout << "3. Year" << endl;
     cout << "4. VIN" << endl;
     cout << "Enter choice (1-4): ";
-    //get user input and get the size of variable. VI
-    getline(cin, searchChoice);
-    int searchChoiceLength = searchChoice.length();
-    // While loop executes until choice is a single digit within range of menu choices. VI
-    while ((searchChoiceLength < 1) || (searchChoiceLength > 1) || (!isdigit(searchChoice.at(0))) || (stoi(searchChoice) > 4) || (stoi(searchChoice) < 1)) {
-        cout << "Please enter an integer 1-4:";
-        getline(cin, searchChoice);
-        searchChoiceLength = searchChoice.length();
-    }// end while VI
-    // Now that input has been validated as a menu choice, convert to int. VI
-    int validSearchChoice = stoi(searchChoice);
-    if (validSearchChoice == 1) {
+  
+    // Get user input
+    int searchChoice = getChoice(4);
+  
+    switch (searchChoice) {
+      case 1:
         // Search by make
         cout << "Enter car make: ";
         cin.ignore();  // To ignore any leftover newline character
@@ -131,9 +140,8 @@ void searchInventory(Car list[]) {
                 found = true;
             }//end if
         }//end for
-
-    }
-    else if (validSearchChoice == 2) {
+        break;
+      case 2:
         // Search by model
         cout << "Enter car model: ";
         cin.ignore();  // To ignore any leftover newline character
@@ -145,8 +153,8 @@ void searchInventory(Car list[]) {
                 found = true;
             }//end if
         }//end for
-    }//end else if
-    else if (validSearchChoice == 3) {
+        break;
+      case 3:
         // Search by year
         cout << "Enter car year: ";
         cin >> searchYear;
@@ -157,8 +165,8 @@ void searchInventory(Car list[]) {
                 found = true;
             }//end if
         }//end for
-    }//end else if
-    else if (validSearchChoice == 4) {
+        break;
+      case 4:
         // Search by VIN
         cout << "Enter car VIN: ";
         cin >> searchVin;
@@ -169,10 +177,9 @@ void searchInventory(Car list[]) {
                 found = true;
             }//if
         }//end for
-    }//end else if
-    else {
-        cout << "Invalid search choice. Please enter 1, 2,3, or 4." << endl;
-    }//end else
+        break;
+      // default unreachable
+    } // end switch
 
     if (!found) {
         cout << "No cars found based on search" << endl;
@@ -193,9 +200,7 @@ are valid inputs, then checks again. If the input is valid, it returns the user'
 Output: an integer ranging from 1-6 (inclusive)
 */
 int displayMenu() {
-    // variable for user input IS
-    string choice = "0";
-    // following six lines display menu IS
+    // Following six lines display menu IS
     cout << "1. Display Available Car Information" << endl;
     cout << "2. Display Sold Car Information" << endl;
     cout << "3. Search Available Inventory" << endl;
@@ -203,20 +208,9 @@ int displayMenu() {
     cout << "5. Display Gross Sales" << endl;
     cout << "6. Exit Program" << endl;
     cout << "7. Display user list" << endl;
-    cout << "Enter choice as integer: ";
-    //get user input and get the size of variable. VI
-    getline(cin, choice);
-    int choiceLength = choice.length();
-    // While loop executes until choice is a single digit within range of menu choices. VI
-    while ((choiceLength < 1) || (choiceLength > 1) || (!isdigit(choice.at(0))) || (stoi(choice) > 7) || (stoi(choice) < 1)) {
-        cout << "Please enter an integer 1-7:";
-        getline(cin, choice);
-        choiceLength = choice.length();
-    }// end while IS
   
-    // Now that input has been validated as a menu choice, convert to int. VI
-    int validatedChoice = stoi(choice);
-    return validatedChoice;
+    // Get user input
+    return getChoice(7);
   
 }// end menuDisplay IS
 
